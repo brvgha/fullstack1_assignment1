@@ -1,0 +1,35 @@
+{
+  "name": "placemark",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "lint": "eslint . --ext .js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brvgha/fullstack1_assignment1.git"
+  },
+  "author": "Brugha Fitzpatrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brvgha/fullstack1_assignment1/issues"
+  },
+  "homepage": "https://github.com/brvgha/fullstack1_assignment1#readme",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.3.3",
+    "@hapi/vision": "^7.0.3",
+    "bulma": "^0.9.4",
+    "handlebars": "^4.7.8",
+    "uuid": "^9.0.1"
+  }
+}
