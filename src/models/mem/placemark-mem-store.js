@@ -2,14 +2,14 @@ import { v4 } from "uuid";
 
 let placemarks = [];
 
-export const playlistMemStore = {
+export const placeMarkMemStore = {
   async getAllPlaceMarks() {
     return placemarks;
   },
 
-  async addPlaceMarks(placemark) {
+  async addPlaceMark(placemark) {
     placemark._id = v4();
-    placemark.push(placemark);
+    placemarks.push(placemark);
     return placemark;
   },
 

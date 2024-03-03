@@ -3,7 +3,7 @@ import { db } from "../models/db.js";
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
-      const placemarks = await db.placemarkStore.getAllPlaceMarks();
+      const placemarks = await db.placeMarkStore.getAllPlaceMarks();
       const viewData = {
         title: "PlaceMark Dashboard",
         placemarks: placemarks,
@@ -15,9 +15,12 @@ export const dashboardController = {
   addPlaceMark: {
     handler: async function (request, h) {
       const newPlaceMark = {
-        name: request.payload.title,
+          name: request.payload.name,
+          cetegory: request.payload.category,
+          description: request.payload.desc,
+          analytics: request.payload.analytics,
       };
-      await db.placemarkStore.addPlaceMark(newPlaceMark);
+      await db.placeMarkStore.addPlaceMark(newPlaceMark);
       return h.redirect("/dashboard");
     },
   },

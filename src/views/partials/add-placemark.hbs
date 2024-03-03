@@ -1,6 +1,20 @@
-<form action="/dashboard/addplacemark" method="POST">
-  <div class="field">
-    <label class="label">PlaceMark Title</label> <input class="input" type="text" placeholder="PlaceMark Point of Interest (POI) name" name="title">
+<form class="box" action="/dashboard/addplacemark" method="POST">
+  <label>Enter Point of Interest Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">Name</label> <input class="input" type="text" placeholder="PoI Name" name="name">
+      </div>
+      <div class="field">
+        <label class="label">Category</label> <input class="input" type="text" placeholder="PoI Category" name="category">
+      </div>
+      <div class="field">
+        <label class="label">Description</label> <input class="input" type="text" placeholder="PoI Description" name="desc">
+      </div>
+      <div class="field">
+        <label class="label">Analytics</label> <input class="input" type="text" placeholder="PoI Analytics" name="analytics">
+      </div>
+    </div>
   </div>
   <button class="button is-link">Add PlaceMark</button>
 </form>
