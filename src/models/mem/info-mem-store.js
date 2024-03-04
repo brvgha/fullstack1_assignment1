@@ -15,7 +15,7 @@ export const infoMemStore = {
   },
 
   async getInfoByPlaceMarkId(id) {
-    return infos.filter((info) => track.placemarkid === id);
+    return infos.filter((info) => info.placemarkid === id);
   },
 
   async getInfoById(id) {

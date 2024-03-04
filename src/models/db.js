@@ -5,7 +5,7 @@ import { infoMemStore } from "./mem/info-mem-store.js";
 export const db = {
   userStore: null,
   placeMarkStore: null,
-  infoMemStore: null,
+  infoStore: null,
 
   init() {
     this.userStore = userMemStore;

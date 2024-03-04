@@ -34,7 +34,7 @@ async function init() {
   server.auth.strategy("session", "cookie", {
     cookie: {
       name: "placemark",
-      password: "1234",
+      password: "password123456789password123456789",
       isSecure: false,
     },
     redirectTo: "/",
