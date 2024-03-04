@@ -21,7 +21,7 @@ export const accountsController = {
       options: { abortEarly: false },
       failAction: function (request, h, error) {
         return h
-          .view("signup-view", {
+          .view("./error", {
             title: "Sign up error",
             errors: error.details,
           })
