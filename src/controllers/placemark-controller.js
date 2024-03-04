@@ -1,4 +1,5 @@
 import { db } from "../models/db.js";
+import { infoSpec } from "../models/joi-schemas.js";
 
 export const placemarkController = {
   index: {
@@ -13,6 +14,19 @@ export const placemarkController = {
   },
 
   addInfo: {
+    validate: {
+      payload: infoSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h
+          .view("./partials/error", {
+            title: "Information input error",
+            errors: error.details,
+          })
+          .takeover()
+          .code(400);
+      },
+    },
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
       const newInfo = {

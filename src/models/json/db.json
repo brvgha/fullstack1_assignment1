@@ -6,6 +6,13 @@
       "email": "john@doe.com",
       "password": "password123456789password123456789",
       "_id": "f6d571ae-6880-4728-9812-dbdc9b6cc25c"
+    },
+    {
+      "firstName": "jane",
+      "lastName": "doe",
+      "email": "jane@doe.ie",
+      "password": "1234",
+      "_id": "93080507-12d5-4081-b67b-024cc45df74f"
     }
   ],
   "placemarks": [
