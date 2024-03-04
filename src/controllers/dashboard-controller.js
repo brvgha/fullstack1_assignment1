@@ -3,6 +3,7 @@ import { db } from "../models/db.js";
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const placemarks = await db.placeMarkStore.getAllPlaceMarks();
       const viewData = {
         title: "PlaceMark Dashboard",
@@ -14,6 +15,7 @@ export const dashboardController = {
 
   addPlaceMark: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const newPlaceMark = {
           name: request.payload.name,
           category: request.payload.category,
