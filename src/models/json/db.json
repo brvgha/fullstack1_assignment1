@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "firstName": "john",
+      "lastName": "doe",
+      "email": "john@doe.com",
+      "password": "password123456789password123456789",
+      "_id": "f6d571ae-6880-4728-9812-dbdc9b6cc25c"
+    }
+  ],
+  "placemarks": [
+    {
+      "userid": "f6d571ae-6880-4728-9812-dbdc9b6cc25c",
+      "name": "Michael Collin's Bridge",
+      "_id": "132ac736-e241-4961-8b76-63ff100b37c4"
+    }
+  ],
+  "infos": [
+    {
+      "category": "Bridge",
+      "description": "Connects Street X to Street Y",
+      "analytics": "1250 visits per day",
+      "_id": "b252d630-3e9b-4cbc-9aa6-4913b182497e",
+      "placemarkid": "132ac736-e241-4961-8b76-63ff100b37c4"
+    }
+  ]
+}

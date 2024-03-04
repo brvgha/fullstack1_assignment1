@@ -16,7 +16,7 @@ export const infoJsonStore = {
     return info;
   },
 
-  async getInfosByPlaylistId(id) {
+  async getInfosByPlaceMarkId(id) {
     await db.read();
     return db.data.infos.filter((info) => info.placemarkid === id);
   },

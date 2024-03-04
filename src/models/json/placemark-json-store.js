@@ -19,7 +19,7 @@ export const placeMarkJsonStore = {
     async getPlaceMarkById(id) {
         await db.read();
         const list = db.data.placemarks.find((placemark) => placemark._id === id);
-        list.info = await infoJsonStore.getInfosByPlaceMarkId(list._id);
+        list.infos = await infoJsonStore.getInfosByPlaceMarkId(list._id);
         return list;
     },
 
