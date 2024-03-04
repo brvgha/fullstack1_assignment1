@@ -16,9 +16,12 @@ export const placemarkController = {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
       const newInfo = {
-        image: request.payload.image,
-        location: request.payload.location,
-        weather: request.payload.weather,
+        category: request.payload.category,
+        description: request.payload.description,
+        analytics: request.payload.analytics,
+        // image: request.payload.image,
+        // location: request.payload.location,
+        // weather: request.payload.weather,
       };
       await db.infoStore.addInfo(placemark._id, newInfo);
       return h.redirect(`/placemark/${placemark._id}`);

@@ -36,8 +36,8 @@ export const infoMemStore = {
   },
 
   async updateInfo(info, updatedInfo) {
-    info.image = updatedInfo.image;
-    info.location = updatedInfo.location;
-    info.weather = updatedInfo.weather;
+    info.category = updatedInfo.category;
+    info.description = updatedInfo.description;
+    info.analytics = updatedInfo.analytics;
   },
 };
