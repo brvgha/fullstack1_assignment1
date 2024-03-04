@@ -16,11 +16,19 @@ export const dashboardController = {
     handler: async function (request, h) {
       const newPlaceMark = {
           name: request.payload.name,
-          cetegory: request.payload.category,
+          category: request.payload.category,
           description: request.payload.desc,
           analytics: request.payload.analytics,
       };
       await db.placeMarkStore.addPlaceMark(newPlaceMark);
+      return h.redirect("/dashboard");
+    },
+  },
+
+  deletePlaceMark: {
+    handler: async function (request, h) {
+      const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
+      await db.placeMarkStore.deletePlaceMarkById(placemark.id);
       return h.redirect("/dashboard");
     },
   },
