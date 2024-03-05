@@ -43,6 +43,19 @@ export const accountsController = {
   },
   login: {
     auth: false,
+    validate: {
+      payload: UserCredentialSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h
+          .view("./error", {
+            title: "Login error",
+            errors: error.details,
+          })
+          .takeover()
+          .code(400);
+      },
+    },
     handler: async function (request, h) {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);

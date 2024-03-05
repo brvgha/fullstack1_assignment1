@@ -1,34 +1,40 @@
 {
   "users": [
     {
-      "firstName": "john",
-      "lastName": "doe",
-      "email": "john@doe.com",
-      "password": "password123456789password123456789",
-      "_id": "f6d571ae-6880-4728-9812-dbdc9b6cc25c"
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "_id": "a8f4dd4b-1dd4-4362-9b00-4593f0f0d4b0"
     },
     {
-      "firstName": "jane",
-      "lastName": "doe",
-      "email": "jane@doe.ie",
-      "password": "1234",
-      "_id": "93080507-12d5-4081-b67b-024cc45df74f"
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret",
+      "_id": "c3a55f63-8462-4b69-9843-cfe2b67f6dad"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret",
+      "_id": "2604a4df-e8ef-490f-b321-97a73be52f0c"
     }
   ],
   "placemarks": [
     {
-      "userid": "f6d571ae-6880-4728-9812-dbdc9b6cc25c",
-      "name": "Michael Collin's Bridge",
-      "_id": "132ac736-e241-4961-8b76-63ff100b37c4"
+      "name": "Place X",
+      "_id": "05de01fc-04d4-4aaf-9a65-fbe1de6e48fe"
+    },
+    {
+      "name": "Place Y",
+      "_id": "4360ccc0-6906-44c2-aaad-90325810c5e8"
+    },
+    {
+      "name": "Place Z",
+      "_id": "9d55331e-88fb-4cfc-8083-e7ce1d344bcb"
     }
   ],
-  "infos": [
-    {
-      "category": "Bridge",
-      "description": "Connects Street X to Street Y",
-      "analytics": "1250 visits per day",
-      "_id": "b252d630-3e9b-4cbc-9aa6-4913b182497e",
-      "placemarkid": "132ac736-e241-4961-8b76-63ff100b37c4"
-    }
-  ]
+  "infos": []
 }
