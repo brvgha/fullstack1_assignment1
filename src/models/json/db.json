@@ -22,19 +22,6 @@
       "_id": "3a6e2d6b-d518-4984-8af0-987ef9ebea21"
     }
   ],
-  "placemarks": [
-    {
-      "name": "Place X",
-      "_id": "b90a3461-f936-43c4-abce-8f45af3d0815"
-    },
-    {
-      "name": "Place Y",
-      "_id": "866c4f38-45a5-457e-9e88-471dc169dd04"
-    },
-    {
-      "name": "Place Z",
-      "_id": "9c1f1f4d-361b-4fb2-a3ac-5b7cbee260b4"
-    }
-  ],
+  "placemarks": [],
   "infos": []
 }
