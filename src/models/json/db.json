@@ -22,6 +22,23 @@
       "_id": "3a6e2d6b-d518-4984-8af0-987ef9ebea21"
     }
   ],
-  "placemarks": [],
+  "placemarks": [
+    {
+      "name": "Place X",
+      "_id": "1a2c5129-9a06-417a-aa44-082a49101968"
+    },
+    {
+      "name": "Place Y",
+      "_id": "c48a7a36-add2-43b0-b194-76ea5d9e8efb"
+    },
+    {
+      "name": "Place Z",
+      "_id": "83220807-d470-4afd-a894-7a97694be595"
+    },
+    {
+      "name": "Michael Collin's Bridge",
+      "_id": "71a2a3d9-ec34-402e-bf9b-044235350644"
+    }
+  ],
   "infos": []
 }
