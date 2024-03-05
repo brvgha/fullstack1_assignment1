@@ -43,6 +43,10 @@ suite("User Model tests", () => {
     const afterDelete = (await db.userStore.getAllUsers()).length;
     assert.equal(afterDelete, beforeDelete - 1);
   });
-  test();
-  test();
+  test("get a user - fail", async () => { 
+
+  });
+  test("delete one user -  fail", async () => { 
+    
+  });
 });
