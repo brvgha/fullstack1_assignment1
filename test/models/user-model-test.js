@@ -3,7 +3,7 @@ import { db } from "../../src/models/db.js";
 import { maggie, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
-suite("User API tests", () => {
+suite("User Model tests", () => {
 
   setup(async () => {
     db.init("mongo");
@@ -42,5 +42,7 @@ suite("User API tests", () => {
     await db.userStore.deleteUserById(id);
     const afterDelete = (await db.userStore.getAllUsers()).length;
     assert.equal(afterDelete, beforeDelete - 1);
-  })
+  });
+  test();
+  test();
 });

@@ -44,10 +44,26 @@ export const mCollinsBridge = {
     name: "Michael Collin's Bridge"
 };
 
+export const bridge = {
+  category: "Bridge",
+  description: "Connects A to B",
+  analytics: "1250 visits per day"
+};
+
 export const testPlaceMarkInfo = [
-    {
-        category: "Bridge",
-        description: "Connects A to B",
-        analytics: "1250 visits per day"
-    }
+  {
+    category: "Bridge",
+    description: "Connects A to B",
+    analytics: "1250 visits per day"
+  },
+  {
+    category: "Building",
+    description: "Home of the President of Ireland",
+    analytics: "2356 visits per day"
+  },
+  {
+    category: "Landmark",
+    description: "Commemoration of 1916",
+    analytics: "800 visits per day"
+  },
 ];

@@ -33,4 +33,23 @@ suite("User API tests", () => {
     const returnedUser = await placeMarkService.getUser(testUsers[0]._id);
     assert.deepEqual(testUsers[0], returnedUser);
   });
+
+  test("get a user - bad id", async () => {
+    try {
+      await placeMarkService.getUser("1234");
+      assert.fail("No response expected")
+    } catch (error) {
+      assert(error.response.data.message === "No User with this id");
+    }
+  });
+
+  test("get user - deleted user", async () => {
+    await placeMarkService.deleteAllUsers();
+    try {
+      const returnedUser = await placeMarkService.getUser(testUsers[0]._id);
+      assert.fail("Should not return a response");
+    } catch (error) {
+      assert(error.response.data.message === "No User with this id");
+    }
+  })
 });
