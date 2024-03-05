@@ -24,8 +24,8 @@ suite("User API tests", () => {
   test("delete all users", async () => {
     let returnedUsers = await placeMarkService.getAllUsers();
     assert.equal(returnedUsers.length, 3);
-    await playtimeService.deleteAllUsers();
-    returnedUsers = await playtimeService.getAllUsers();
+    await placeMarkService.deleteAllUsers();
+    returnedUsers = await placeMarkService.getAllUsers();
     assert.equal(returnedUsers.length, 0);
   });
 
