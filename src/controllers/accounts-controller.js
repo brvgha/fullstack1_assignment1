@@ -1,17 +1,34 @@
+import { UserSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 
 export const accountsController = {
   index: {
+    auth: false,
     handler: function (request, h) {
-      return h.view("main", { title: "Welcome to Playlist" });
+      return h.view("main", { title: "Welcome to PlaceMark" });
     },
   },
   showSignup: {
+    auth: false,
     handler: function (request, h) {
-      return h.view("signup-view", { title: "Sign up for Playlist" });
+      return h.view("signup-view", { title: "Sign up for PlaceMark" });
     },
   },
   signup: {
+    auth: false,
+    validate: {
+      payload: UserSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h
+          .view("./error", {
+            title: "Sign up error",
+            errors: error.details,
+          })
+          .takeover()
+          .code(400);
+      },
+    },
     handler: async function (request, h) {
       const user = request.payload;
       await db.userStore.addUser(user);
@@ -19,23 +36,48 @@ export const accountsController = {
     },
   },
   showLogin: {
+    auth: false,
     handler: function (request, h) {
-      return h.view("login-view", { title: "Login to Playlist" });
+      return h.view("login-view", { title: "Login to PlaceMark" });
     },
   },
   login: {
+    auth: false,
+    validate: {
+      payload: UserCredentialSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h
+          .view("./error", {
+            title: "Login error",
+            errors: error.details,
+          })
+          .takeover()
+          .code(400);
+      },
+    },
     handler: async function (request, h) {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
       if (!user || user.password !== password) {
         return h.redirect("/");
       }
+      request.cookieAuth.set({ id: user._id });
       return h.redirect("/dashboard");
     },
   },
   logout: {
     handler: function (request, h) {
+      request.cookieAuth.clear();
       return h.redirect("/");
     },
+  },
+  
+  async validate(request, session) {
+    const user = await db.userStore.getUserById(session.id);
+    if (!user) {
+      return { isValid: false };
+    }
+    return { isValid: true, credentials: user };
   },
 };
