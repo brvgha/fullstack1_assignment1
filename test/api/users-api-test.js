@@ -6,14 +6,18 @@ import { maggie, testUsers } from "../fixtures.js";
 
 suite("User API tests", () => {
   setup(async () => {
+    placeMarkService.clearAuth();
+    await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggie);
     await placeMarkService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       testUsers[i] = await placeMarkService.createUser(testUsers[i]);
     }
+    await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggie);
   });
-  teardown(async () => {
-  });
+  teardown(async () => {});
 
   test("create a user", async () => {
     const newUser = await placeMarkService.createUser(maggie);
@@ -23,14 +27,16 @@ suite("User API tests", () => {
 
   test("delete all users", async () => {
     let returnedUsers = await placeMarkService.getAllUsers();
-    assert.equal(returnedUsers.length, 3);
+    assert.equal(returnedUsers.length, 4);
     await placeMarkService.deleteAllUsers();
+    await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggie);
     returnedUsers = await placeMarkService.getAllUsers();
-    assert.equal(returnedUsers.length, 0);
+    assert.equal(returnedUsers.length, 1);
   });
 
   test("get a user - success", async () => {
-    const returnedUser = await placeMarkService.getUser(testUsers[0]._id);
+    const returnedUser = await placeMarkService.getUser(testUsers[1]._id);
     assert.deepEqual(testUsers[0], returnedUser);
   });
 
@@ -40,11 +46,14 @@ suite("User API tests", () => {
       assert.fail("No response expected")
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
+      assert.equal(error.response.data.statusCode, 503);
     }
   });
 
   test("get user - deleted user", async () => {
     await placeMarkService.deleteAllUsers();
+    await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggie);
     try {
       const returnedUser = await placeMarkService.getUser(testUsers[0]._id);
       assert.fail("Should not return a response");

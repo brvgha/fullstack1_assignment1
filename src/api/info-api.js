@@ -5,11 +5,13 @@ import { validationError } from "./logger.js";
 
 export const infoApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
-        const infos = await db.infoStore.getAllInfos();
-        return infos;
+        const info = await db.infoStore.getAllInfos();
+        return info;
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
@@ -21,7 +23,9 @@ export const infoApi = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     async handler(request) {
       try {
         const info = await db.infoStore.getInfoById(request.params.id);
@@ -41,7 +45,9 @@ export const infoApi = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const info = await db.infoStore.addInfo(request.params.id, request.payload);
@@ -61,7 +67,9 @@ export const infoApi = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.infoStore.deleteAllInfos();
@@ -75,7 +83,9 @@ export const infoApi = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const info = await db.infoStore.getInfoById(request.params.id);

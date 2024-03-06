@@ -11,13 +11,17 @@ suite("Placemark API tests", () => {
   let user = null;
   
   setup(async () => {
+    placeMarkService.clearAuth();
+    user = await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggie);
     await placeMarkService.deleteAllPlaceMarks();
     await placeMarkService.deleteAllUsers();
     user = await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggie);    
     mCollinsBridge.userid = user._id;
   });
 
-    teardown(async () => {});
+  teardown(async () => {});
 
   test("create Placemark", async () => {
     const returnedPlaceMark = await placeMarkService.createPlaceMark(mCollinsBridge);
@@ -39,9 +43,9 @@ suite("Placemark API tests", () => {
 
   test("create multiple Placemarks", async () => {
     for (let i = 0; i < testPlaceMark.length; i += 1) {
-    testPlaceMark[i].userid = user._id;
+      testPlaceMark[i].userid = user._id;
       // eslint-disable-next-line no-await-in-loop
-    await placeMarkService.createPlaceMark(testPlaceMark[i]);
+      await placeMarkService.createPlaceMark(testPlaceMark[i]);
     }
     let returnedLists = await placeMarkService.getAllPlaceMarks();
     assert.equal(returnedLists.length, testPlaceMark.length);
@@ -58,4 +62,6 @@ suite("Placemark API tests", () => {
       assert(error.response.data.message === "No PlaceMark with this id", "Incorrect Response Message");
     }
   });
+
+  
 });

@@ -2,9 +2,9 @@ import { Info } from "./info.js";
 import { PlaceMark } from "./placemark.js";
 
 export const infoMongoStore = {
-  async getInfosByPlaceMarkId(id) {
-    const infos = await Info.find({ placemarkid: id }).lean();
-    return infos;
+  async getInfoByPlaceMarkId(id) {
+    const info = await Info.find({ placemarkid: id }).lean();
+    return info;
   },
   async getAllInfo() {
     const info = await Info.find().lean();
@@ -16,11 +16,6 @@ export const infoMongoStore = {
     const newInfo = new Info(info);
     const infoObj = await newInfo.save();
     return this.getInfoById(infoObj._id);
-  },
-
-  async getInfoByPlaceMarkId(id) {
-    const info = await Info.find({ placemarkid: id }).lean();
-    return info;
   },
 
   async getInfoById(id) {
