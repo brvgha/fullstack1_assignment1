@@ -5,7 +5,7 @@ import { maggie, mCollinsBridge, testPlaceMarkInfo, testPlaceMark } from "../fix
 
 suite("Info API tests", () => {
   let user = null;
-  let testPlaceMarkInfo = null;
+  let testInfo = null;
 
   setup(async () => {
   });

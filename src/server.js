@@ -7,11 +7,13 @@ import Joi from "joi";
 import Handlebars from "handlebars";
 import Inert from "@hapi/inert";
 import HapiSwagger from "hapi-swagger";
+import jwt from "hapi-auth-jwt2";
 import { fileURLToPath } from "url";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { apiRoutes } from "./api-routes.js";
+import { validate } from "./api/jwt-utils.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -42,6 +44,7 @@ async function init() {
     Inert,
     Vision,
     Cookie,
+    jwt,
     {
       plugin: HapiSwagger,
       options: swaggerOptions
