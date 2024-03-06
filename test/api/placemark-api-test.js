@@ -2,6 +2,7 @@ import { EventEmitter } from "events";
 import { assert } from "chai";
 import { placeMarkService } from "./placemark-service.js";
 import { assertSubset } from "../test-utils.js";
+
 import { mCollinsBridge, testPlaceMark, maggie } from "../fixtures.js";
 
 EventEmitter.setMaxListeners(25);
@@ -10,7 +11,7 @@ suite("Placemark API tests", () => {
   let user = null;
   
   setup(async () => {
-    await placeMarkService.deleteAllPlacemarks();
+    await placeMarkService.deleteAllPlaceMarks();
     await placeMarkService.deleteAllUsers();
     user = await placeMarkService.createUser(maggie);
     mCollinsBridge.userid = user._id;
@@ -25,7 +26,7 @@ suite("Placemark API tests", () => {
   });
 
   test("delete a Placemark", async () => {
-    const placemark = await placeMarkService.createPlaceMark(mozart);
+    const placemark = await placeMarkService.createPlaceMark(mCollinsBridge);
     const response = await placeMarkService.deletePlaceMark(placemark._id);
     assert.equal(response.status, 204);
     try {
