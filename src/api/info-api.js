@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { infoSpec, placeMarkSpec } from "../models/joi-schemas.js";
 
+
 export const infoApi = {
   find: {
     auth: false,

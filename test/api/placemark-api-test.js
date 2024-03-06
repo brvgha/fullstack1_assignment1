@@ -28,9 +28,9 @@ suite("Placemark API tests", () => {
   test("delete a Placemark", async () => {
     const placemark = await placeMarkService.createPlaceMark(mCollinsBridge);
     const response = await placeMarkService.deletePlaceMark(placemark._id);
-    assert.equal(response.status, 204);
+    assert.equal(response.status, 204); // fine
     try {
-      const returnedPlaceMark = await placeMarkService.getPlaceMark(placemark.id);
+      const returnedPlaceMark = await placeMarkService.getPlaceMark(placemark._id);
       assert.fail("Should not return a response");
     } catch (error) {
       assert(error.response.data.message === "No PlaceMark with this id", "Incorrect Response Message");
