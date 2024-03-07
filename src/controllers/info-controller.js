@@ -30,7 +30,8 @@ export const infoController = {
       const newInfo = {
         category: request.payload.category,
         description: request.payload.description,
-        analytics: request.payload.analytics,
+        lat: request.payload.lat,
+        lng: request.payload.lng,
       };
       await db.infoStore.updateInfo(info, newInfo);
       return h.redirect(`/placemark/${request.params.id}`);

@@ -35,30 +35,36 @@ export const testUsers = [
     lastName: "Simpson",
     email: "homer@simpson.com",
     password: "secret",
+    type: "user"
   },
   {
     firstName: "Marge",
     lastName: "Simpson",
     email: "marge@simpson.com",
     password: "secret",
+    type: "user"
   },
   {
     firstName: "Bart",
     lastName: "Simpson",
     email: "bart@simpson.com",
     password: "secret",
+    type: "user"
   },
 ];
 
 export const testPlaceMark = [
     {
-        name: "Place X"
+      name: "Place X",
+      img : "",
     },
     {
-        name: "Place Y"
+      name: "Place Y",
+      img : "",
     },
     {
-        name: "Place Z"
+      name: "Place Z",
+      img : "",
     }
 ];
 
@@ -70,7 +76,9 @@ export const mCollinsBridge = {
 export const bridge = {
   category: "Bridge",
   description: "Connects A to B",
-  analytics: "800 visits per day"
+  analytics: Number("800"),
+  lat: Number("51.46"),
+  lng: Number("-104.56"),
 };
 
 export const corkCity = {
@@ -82,16 +90,22 @@ export const testPlaceMarkInfo = [
   {
     category: "Bridge",
     description: "Connects A to B",
-    analytics: "1250 visits per day"
+    analytics: Number("1250"),
+    lat: Number("51.46"),
+    lng: Number("-104.56"),
   },
   {
     category: "Building",
     description: "Home of the President of Ireland",
-    analytics: "2356 visits per day"
+    analytics: Number("2356"),
+    lat: Number("51.46"),
+    lng: Number("-104.56"),
   },
   {
     category: "Landmark",
     description: "Commemoration of 1916",
-    analytics: "800 visits per day"
+    analytics: Number("800"),
+    lat: Number("51.46"),
+    lng: Number("-104.56"),
   },
 ];

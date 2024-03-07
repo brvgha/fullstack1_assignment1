@@ -22,7 +22,7 @@ suite("Info API tests", () => {
 
   teardown(async () => {});
 
-	test("create info", async () => {
+  test("create info", async () => {
 		const returnedInfo = await placeMarkService.createInfo(testInfo._id, bridge);
     assertSubset(bridge, returnedInfo);
   });

@@ -12,15 +12,22 @@
 
 <section class="section">
     <div class="is-collapsible">
-        <h1 id="users" style="font-size: xx-large;">Users</h1>
-        {{> list-users}}
+        <details open>
+            <summary id="users" style="font-size: xx-large;">Users</summary>
+            {{> list-users}}           
+        </details>        
+        
     </div>
     <div class="is-collapsible"> 
-        <h1 id="placemarks" style="font-size: xx-large;">PlaceMarks</h1>
-        {{> list-placemarks-admin}}
+        <details open>
+            <summary id="placemarks" style="font-size: xx-large;">PlaceMarks</summary>
+            {{> list-placemarks-admin}}
+        </details>
     </div>
     <div class="is-collapsible">
-        <h1 id="info" style="font-size: xx-large;">Information Details</h1>
-        {{> list-infos-admin}}
+        <details open>
+            <summary id="info" style="font-size: xx-large;">Information Details</summary>
+            {{> list-infos-admin}}
+        </details>       
     </div>
 </section>

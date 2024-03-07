@@ -27,9 +27,11 @@ export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");
 
 export const infoSpec = Joi.object()
   .keys({
-    category: Joi.string().required().example("Bridge"),
     description: Joi.string().allow("").optional().example("Connects Street X to Street Y"),
-    analytics: Joi.string().allow("").optional().example("900 visits per day"),
+    lat: Joi.number().required().example(51.42),
+    lng: Joi.number().required().example(51.42),
+    category: Joi.string().required().example("Bridge"),
+    analytics: Joi.number().allow("").optional().example(900),
     placemarkid: IdSpec
   })
   .label("InfoSpec")
