@@ -1,9 +1,9 @@
 import { assert } from "chai";
-import { db } from "../src/models/db.js";
-import { maggie, testUsers } from "./fixtures.js";
-import { assertSubset } from "./test-utils.js";
+import { db } from "../../src/models/db.js";
+import { barney, maggie, testUsers } from "../fixtures.js";
+import { assertSubset } from "../test-utils.js";
 
-suite("User API tests", () => {
+suite("User Model tests", () => {
 
   setup(async () => {
     db.init("mongo");
@@ -42,5 +42,22 @@ suite("User API tests", () => {
     await db.userStore.deleteUserById(id);
     const afterDelete = (await db.userStore.getAllUsers()).length;
     assert.equal(afterDelete, beforeDelete - 1);
-  })
+  });
+  test("get a user - fail", async () => { 
+    const user = await db.userStore.getUserById();
+    console.log(user);
+    assert.isNull(user);
+  });
+  test("delete one user -  fail", async () => { 
+    const numOfUsersBefore = (await db.userStore.getAllUsers()).length;
+    await db.userStore.deleteUserById();
+    const numOfUsersAfter = (await db.userStore.getAllUsers()).length;
+    assert.equal(numOfUsersAfter, numOfUsersBefore);
+  });
+
+  test("update user - success", async () => {
+    const user = await db.userStore.addUser(maggie);
+    const updatedUser = await db.userStore.updateUser(user._id, barney)
+    assertSubset(barney, updatedUser);
+  });
 });

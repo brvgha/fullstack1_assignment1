@@ -31,7 +31,7 @@ export const infoMemStore = {
     infos.splice(index, 1);
   },
 
-  async deleteAllTracks() {
+  async deleteAllInfo() {
     infos = [];
   },
 

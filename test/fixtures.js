@@ -1,8 +1,22 @@
+export const serviceUrl = "http://localhost:3000";
+
 export const maggie = {
-    firstName: "Maggie",
-    lastName: "Simpson",
-    email: "maggie@simpson.com",
-    password: "secret",
+  firstName: "Maggie",
+  lastName: "Simpson",
+  email: "maggie@simpson.com",
+  password: "secret",
+};
+
+export const barney = {
+  firstName: "Barney",
+  lastName: "Gumble",
+  email: "barney@gumble.com",
+  password: "1234",
+}
+
+export const maggieCredentials = {
+  email: "maggie@simpson.com",
+  password: "secret"
 };
   
 export const testUsers = [
@@ -39,13 +53,35 @@ export const testPlaceMark = [
 ];
 
 export const mCollinsBridge = {
-    name: "Michael Collin's Bridge"
+  name: "Michael Collin's Bridge",
+  img : "",
 };
 
+export const bridge = {
+  category: "Bridge",
+  description: "Connects A to B",
+  analytics: "800 visits per day"
+};
+
+export const corkCity = {
+  name: "Cork City",
+  img: "",
+}
+
 export const testPlaceMarkInfo = [
-    {
-        category: "Bridge",
-        description: "Connects A to B",
-        analytics: "1250 visits per day"
-    }
+  {
+    category: "Bridge",
+    description: "Connects A to B",
+    analytics: "1250 visits per day"
+  },
+  {
+    category: "Building",
+    description: "Home of the President of Ireland",
+    analytics: "2356 visits per day"
+  },
+  {
+    category: "Landmark",
+    description: "Commemoration of 1916",
+    analytics: "800 visits per day"
+  },
 ];

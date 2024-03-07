@@ -1,5 +1,6 @@
 import { db } from "../models/db.js";
 import { infoSpec } from "../models/joi-schemas.js";
+import { imageStore } from "../models/image-store.js";
 
 export const placemarkController = {
   index: {
@@ -45,9 +46,32 @@ export const placemarkController = {
   deleteInfo: {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-      const info = await db.infoStore.getInfoById(request.params.infoid);
-      await db.infoStore.deleteInfo(info);
+      await db.infoStore.deleteInfo(request.params.infoid);
       return h.redirect(`/placemark/${placemark._id}`);
+    },
+  },
+
+  uploadImage: {
+    handler: async function (request, h) {
+      try {
+        const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
+        const file = request.payload.imagefile;
+        if (Object.keys(file).length > 0) {
+          const url = await imageStore.uploadImage(request.payload.imagefile);
+          placemark.img = url;
+          await db.placeMarkStore.updatePlaceMark(placemark._id,placemark);
+        }
+        return h.redirect(`/placemark/${placemark._id}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/placemark/${placemark._id}`);
+      }
+    },
+    payload: {
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true,
     },
   },
 };

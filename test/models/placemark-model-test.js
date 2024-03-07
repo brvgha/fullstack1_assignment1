@@ -1,8 +1,8 @@
 import { EventEmitter } from "events";
 import { assert } from "chai";
-import { db } from "../src/models/db.js";
-import { testPlaceMark, mCollinsBridge } from "./fixtures.js";
-import { assertSubset } from "./test-utils.js";
+import { db } from "../../src/models/db.js";
+import { testPlaceMark, mCollinsBridge, corkCity } from "../fixtures.js";
+import { assertSubset } from "../test-utils.js";
 
 EventEmitter.setMaxListeners(25);
 
@@ -55,4 +55,10 @@ suite("Placemark Model tests", () => {
     const allPlacemarks = await db.placeMarkStore.getAllPlaceMarks();
     assert.equal(testPlaceMark.length, allPlacemarks.length);
   });
+
+  test("update placemark - success", async () => {
+    const placemark = await db.placeMarkStore.addPlaceMark(mCollinsBridge);
+    const updated = await db.placeMarkStore.updatePlaceMark(placemark._id, corkCity);
+    assert.equal(updated.name, corkCity.name)
+  })
 });

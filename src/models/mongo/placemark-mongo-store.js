@@ -11,7 +11,7 @@ export const placeMarkMongoStore = {
     if (id) {
       const placemark = await PlaceMark.findOne({ _id: id }).lean();
       if (placemark) {
-        placemark.infos = await infoMongoStore.getInfosByPlaceMarkId(placemark._id);
+        placemark.infos = await infoMongoStore.getInfoByPlaceMarkId(placemark._id);
       }
       return placemark;
     }
@@ -39,5 +39,13 @@ export const placeMarkMongoStore = {
 
   async deleteAllPlaceMarks() {
     await PlaceMark.deleteMany({});
+  },
+
+  async updatePlaceMark(placemarkid, updatedPlaceMark) {
+    const placemark = await PlaceMark.findOne({ _id: placemarkid });
+    placemark.name = updatedPlaceMark.name;
+    placemark.img = updatedPlaceMark.img;
+    await placemark.save();
+    return placemark;
   }
 };

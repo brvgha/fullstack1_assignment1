@@ -16,7 +16,7 @@ export const infoJsonStore = {
     return info;
   },
 
-  async getInfosByPlaceMarkId(id) {
+  async getInfoByPlaceMarkId(id) {
     await db.read();
     return db.data.infos.filter((info) => info.placemarkid === id);
   },
@@ -33,7 +33,7 @@ export const infoJsonStore = {
     await db.write();
   },
 
-  async deleteAllInfos() {
+  async deleteAllInfo() {
     db.data.infos = [];
     await db.write();
   },
