@@ -39,10 +39,9 @@ export const infoMongoStore = {
   },
 
   async updateInfo(info, updatedInfo) {
-    const infoDoc = await Info.findOne({ _id: info._id });
-    infoDoc.title = updatedInfo.title;
-    infoDoc.artist = updatedInfo.artist;
-    infoDoc.duration = updatedInfo.duration;
-    await infoDoc.save();
+    info.title = updatedInfo.title;
+    info.artist = updatedInfo.artist;
+    info.duration = updatedInfo.duration;
+    await info.save();
   },
 };

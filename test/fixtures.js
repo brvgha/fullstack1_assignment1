@@ -46,7 +46,8 @@ export const testPlaceMark = [
 ];
 
 export const mCollinsBridge = {
-    name: "Michael Collin's Bridge"
+  name: "Michael Collin's Bridge"
+  img : ""
 };
 
 export const bridge = {
@@ -57,6 +58,7 @@ export const bridge = {
 
 export const corkCity = {
   name: "Cork City",
+  img: "",
 }
 
 export const testPlaceMarkInfo = [
