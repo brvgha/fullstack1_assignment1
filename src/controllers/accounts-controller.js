@@ -72,6 +72,19 @@ export const accountsController = {
       return h.redirect("/");
     },
   },
+
+  update: {
+    validate: {
+      payload: UserSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("./error",
+          { title: "Edit user error", errors: error.details })
+          .takeover()
+          .code(400);
+      },
+    },
+  },
   
   async validate(request, session) {
     const user = await db.userStore.getUserById(session.id);

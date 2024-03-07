@@ -1,7 +1,8 @@
 import { assert } from "chai";
 import { placeMarkService } from "./placemark-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, testUsers, maggieCredentials } from "../fixtures.js";
+import { maggie, testUsers, maggieCredentials, barney } from "../fixtures.js";
+import { db } from "../../src/models/db.js";
 
 const users = new Array(testUsers.length);
 
@@ -62,5 +63,7 @@ suite("User API tests", () => {
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
     }
-  })
+  });
+
+  
 });

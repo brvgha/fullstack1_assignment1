@@ -59,7 +59,7 @@ export const placemarkController = {
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
           placemark.img = url;
-          await db.placeMarkStore.updatePlaylist(placemark);
+          await db.placeMarkStore.updatePlaceMark(placemark._id,placemark);
         }
         return h.redirect(`/placemark/${placemark._id}`);
       } catch (err) {

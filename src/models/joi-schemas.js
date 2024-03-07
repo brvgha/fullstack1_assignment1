@@ -46,6 +46,7 @@ export const infoSpecArray = Joi.array()
 export const placeMarkSpec = Joi.object()
   .keys({
     name: Joi.string().example("Cork City").required(),
+    img: Joi.string().optional().allow(""),
     userid: IdSpec,
     infos: infoSpecArray
   })

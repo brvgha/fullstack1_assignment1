@@ -7,6 +7,13 @@ export const maggie = {
   password: "secret",
 };
 
+export const barney = {
+  firstName: "Barney",
+  lastName: "Gumble",
+  email: "barney@gumble.com",
+  password: "1234",
+}
+
 export const maggieCredentials = {
   email: "maggie@simpson.com",
   password: "secret"
@@ -46,8 +53,8 @@ export const testPlaceMark = [
 ];
 
 export const mCollinsBridge = {
-  name: "Michael Collin's Bridge"
-  img : ""
+  name: "Michael Collin's Bridge",
+  img : "",
 };
 
 export const bridge = {
