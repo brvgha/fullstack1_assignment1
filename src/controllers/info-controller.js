@@ -6,8 +6,9 @@ export const infoController = {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
       const info = await db.infoStore.getInfoById(request.params.infoid);
+      console.log(placemark, info);
       const viewData = {
-        title: "Edit Song",
+        title: "Show Information",
         placemark: placemark,
         info: info,
       };

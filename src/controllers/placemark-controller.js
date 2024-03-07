@@ -34,9 +34,8 @@ export const placemarkController = {
         category: request.payload.category,
         description: request.payload.description,
         analytics: request.payload.analytics,
-        // image: request.payload.image,
-        // location: request.payload.location,
-        // weather: request.payload.weather,
+        lat: request.payload.lat,
+        lng: request.payload.lng
       };
       await db.infoStore.addInfo(placemark._id, newInfo);
       return h.redirect(`/placemark/${placemark._id}`);

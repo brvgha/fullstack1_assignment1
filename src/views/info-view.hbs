@@ -1,0 +1,25 @@
+{{> menu}}
+
+<form class="box"  action="/info/{{placemark._id}}/updateinfo/{{info._id}}" method="POST">
+  <label>Update Track Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <input class="input" type="text" name="category", value="{{info.category}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text" name="description" value="{{info.description}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text"  name="analytics" value="{{info.analytics}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text"  name="lat" value="{{info.lat}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text"  name="lng" value="{{info.lng}}">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Update Information</button>
+</form>

@@ -32,7 +32,7 @@ suite("Placemark API tests", () => {
   test("delete a Placemark", async () => {
     const placemark = await placeMarkService.createPlaceMark(mCollinsBridge);
     const response = await placeMarkService.deletePlaceMark(placemark._id);
-    assert.equal(response.status, 204); // fine
+    assert.equal(response.status, 204);
     try {
       const returnedPlaceMark = await placeMarkService.getPlaceMark(placemark._id);
       assert.fail("Should not return a response");

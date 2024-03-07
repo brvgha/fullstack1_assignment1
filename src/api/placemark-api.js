@@ -74,6 +74,7 @@ export const placeMarkApi = {
     handler: async function (request, h) {
       try {
         const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
+        
         if (!placemark) {
           return Boom.notFound("No PlaceMark with this id");
         }
