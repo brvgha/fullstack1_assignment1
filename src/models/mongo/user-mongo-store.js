@@ -44,6 +44,7 @@ export const userMongoStore = {
     user.lastName = updatedUser.lastname;
     user.email = updatedUser.email;
     user.password = updatedUser.password;
+    user.type = "user";
     await user.save();
     return user;
   }

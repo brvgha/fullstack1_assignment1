@@ -1,0 +1,26 @@
+{{> admin-menu active="admin"}}
+
+<div style="text-align: center;">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#users">Users</a></li>
+        <li><a href="#placemarks">Placemarks</a></li>
+        <li><a href="#info">Information Details</a></li>
+    </ul>
+</div>
+
+
+<section class="section">
+    <div class="is-collapsible">
+        <h1 id="users" style="font-size: xx-large;">Users</h1>
+        {{> list-users}}
+    </div>
+    <div class="is-collapsible"> 
+        <h1 id="placemarks" style="font-size: xx-large;">PlaceMarks</h1>
+        {{> list-placemarks-admin}}
+    </div>
+    <div class="is-collapsible">
+        <h1 id="info" style="font-size: xx-large;">Information Details</h1>
+        {{> list-infos-admin}}
+    </div>
+</section>

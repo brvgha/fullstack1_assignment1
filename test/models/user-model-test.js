@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { barney, maggie, testUsers } from "../fixtures.js";
+import { barney, lisa, maggie, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("User Model tests", () => {
@@ -60,4 +60,10 @@ suite("User Model tests", () => {
     const updatedUser = await db.userStore.updateUser(user._id, barney)
     assertSubset(barney, updatedUser);
   });
+
+  test("confim admin", async () => {
+    const admin = await db.userStore.addUser(lisa);
+    console.log(admin);
+    assert.equal(admin.type, "admin");
+  })
 });

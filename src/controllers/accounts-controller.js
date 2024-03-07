@@ -31,6 +31,11 @@ export const accountsController = {
     },
     handler: async function (request, h) {
       const user = request.payload;
+      if (user.email === "20104109@mail.wit.ie") {
+        user.type = "admin"
+      } else {
+        user.type = "user";
+      }
       await db.userStore.addUser(user);
       return h.redirect("/");
     },
@@ -61,10 +66,14 @@ export const accountsController = {
       const user = await db.userStore.getUserByEmail(email);
       if (!user || user.password !== password) {
         return h.redirect("/");
+      };
+      if (user.type === "admin") {
+        request.cookieAuth.set({ id: user._id });
+        return h.redirect("/admin");
       }
       request.cookieAuth.set({ id: user._id });
       return h.redirect("/dashboard");
-    },
+    }
   },
   logout: {
     handler: function (request, h) {

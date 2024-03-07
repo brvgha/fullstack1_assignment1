@@ -6,9 +6,9 @@ export const IdSpec = Joi.alternatives()
 
 export const UserCredentialsSpec = Joi.object()
   .keys({
-    
     email: Joi.string().email().example("homer@simpson.com").required(),
     password: Joi.string().example("secret1234?").required(),
+    type: Joi.string().optional()
   })
   .label("UserCredentials");
 
@@ -20,6 +20,7 @@ export const UserSpec = UserCredentialsSpec.keys({
 export const UserSpecExt = UserSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  
 }).label("UserDetailsExt");
 
 export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");

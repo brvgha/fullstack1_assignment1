@@ -5,6 +5,7 @@ export const maggie = {
   lastName: "Simpson",
   email: "maggie@simpson.com",
   password: "secret",
+  type: "user",
 };
 
 export const barney = {
@@ -12,6 +13,15 @@ export const barney = {
   lastName: "Gumble",
   email: "barney@gumble.com",
   password: "1234",
+  type: "user",
+}
+
+export const lisa = {
+  firstName: "Lisa",
+  lastName: "Simpson",
+  email: "lisa@simpson.com",
+  password: "1234",
+  type: "admin",
 }
 
 export const maggieCredentials = {
