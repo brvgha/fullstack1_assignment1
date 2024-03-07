@@ -1,4 +1,4 @@
-import { UserSpec, UserCredentialSpec} from "../models/joi-schemas.js";
+import { UserSpec, UserCredentialsSpec} from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 
 export const accountsController = {
@@ -44,7 +44,7 @@ export const accountsController = {
   login: {
     auth: false,
     validate: {
-      payload: UserCredentialSpec,
+      payload: UserCredentialsSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
         return h

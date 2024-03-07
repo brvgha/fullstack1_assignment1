@@ -4,35 +4,31 @@ export const IdSpec = Joi.alternatives()
   .try(Joi.string(), Joi.object())
   .description("a valid ID");
 
-export const UserSpec = Joi.object()
+export const UserCredentialsSpec = Joi.object()
   .keys({
-    firstName: Joi.string().example("Homer").required(),
-    lastName: Joi.string().example("Simpson").required(),
-    email: Joi.string().email().example("homer@simpson.com").required(),
-    password: Joi.string().example("secret1234?").required(),
-    _id: IdSpec,
-    __v: Joi.number(),
-  })
-  .label("UserDetails");
-
-export const UserArray = Joi.array().items(UserSpec).label("UserArray");
-
-export const UserCredentialSpec = Joi.object()
-  .keys({
+    
     email: Joi.string().email().example("homer@simpson.com").required(),
     password: Joi.string().example("secret1234?").required(),
   })
   .label("UserCredentials");
 
-export const UserCredentialsArray = Joi.array()
-  .items(UserCredentialSpec)
-  .label("UserCredentialsArray");
+export const UserSpec = UserCredentialsSpec.keys({
+  firstName: Joi.string().example("Homer").required(),
+  lastName: Joi.string().example("Simpson").required(),
+}).label("UserDetails")
+
+export const UserSpecExt = UserSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("UserDetailsExt");
+
+export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");
 
 export const infoSpec = Joi.object()
   .keys({
-    category: Joi.string().required(),
-    description: Joi.string().allow("").optional(),
-    analytics: Joi.string().allow("").optional(),
+    category: Joi.string().required().example("Bridge"),
+    description: Joi.string().allow("").optional().example("Connects Street X to Street Y"),
+    analytics: Joi.string().allow("").optional().example("900 visits per day"),
     placemarkid: IdSpec
   })
   .label("InfoSpec")
@@ -51,16 +47,21 @@ export const placeMarkSpec = Joi.object()
   .keys({
     name: Joi.string().example("Cork City").required(),
     userid: IdSpec,
-    info: infoSpecArray
+    infos: infoSpecArray
   })
   .label("PlaceMarkSpec");
 
 export const placeMarkSpecExt = placeMarkSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-});
+}).label("PlaceMarkExt")
 
-export const placeMarkSpecArray = Joi.array()
-  .items(placeMarkSpec)
-  .label("placeMarkSpecArray");
+export const placeMarkSpecArray = Joi.array().items(placeMarkSpecExt).label("placeMarkSpecArray");
+
+export const JwtAuth = Joi.object()
+  .keys({
+    success: Joi.boolean().example("true").required(),
+    token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+  })
+  .label("JwtAuth");
 

@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { placeMarkService } from "./placemark-service.js";
-import { maggie, mCollinsBridge, testPlaceMarkInfo, testPlaceMark, bridge } from "../fixtures.js";
+import { maggie, mCollinsBridge, testPlaceMarkInfo, testPlaceMark, bridge, maggieCredentials } from "../fixtures.js";
 
 suite("Info API tests", () => {
   let user = null;
@@ -10,12 +10,12 @@ suite("Info API tests", () => {
   setup(async () => {
     placeMarkService.clearAuth();
     user = await placeMarkService.createUser(maggie);
-    await placeMarkService.authenticate(maggie);
+    await placeMarkService.authenticate(maggieCredentials);
     await placeMarkService.deleteAllPlaceMarks();
     await placeMarkService.deleteAllInfo();
     await placeMarkService.deleteAllUsers();
     user = await placeMarkService.createUser(maggie);
-    await placeMarkService.authenticate(maggie);
+    await placeMarkService.authenticate(maggieCredentials);
     mCollinsBridge.userid = user._id;
     testInfo = await placeMarkService.createPlaceMark(mCollinsBridge);  
   });
@@ -33,7 +33,7 @@ suite("Info API tests", () => {
       await placeMarkService.createInfo(testInfo._id, testPlaceMarkInfo[i]);
     }
     const returnedInfo = await placeMarkService.getAllInfo();
-    assert.equal(returnedInfo.length, testInfo.length);
+    assert.equal(returnedInfo.length, testPlaceMarkInfo.length);
     for (let i = 0; i < returnedInfo.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       const info = await placeMarkService.getInfo(returnedInfo[i]._id);
@@ -44,27 +44,27 @@ suite("Info API tests", () => {
 	test("Delete info", async () => {
 		for (let i = 0; i < testPlaceMarkInfo.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await playtimeService.createInfo(testInfo._id, testPlaceMarkInfo[i]);
+      await placeMarkService.createInfo(testInfo._id, testPlaceMarkInfo[i]);
     }
-    let returnedInfo = await playtimeService.getAllInfo();
+    let returnedInfo = await placeMarkService.getAllInfo();
     assert.equal(returnedInfo.length, testPlaceMarkInfo.length);
     for (let i = 0; i < returnedInfo.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      const info = await playtimeService.deleteInfo(returnedInfo[i]._id);
+      const info = await placeMarkService.deleteInfo(returnedInfo[i]._id);
     }
-    returnedInfo = await playtimeService.getAllInfo();
+    returnedInfo = await placeMarkService.getAllInfo();
     assert.equal(returnedInfo.length, 0);
   });
 
 	test("test denormalised placemark", async () => {
 		for (let i = 0; i < testPlaceMarkInfo.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await playtimeService.createInfo(testPlaceMarkInfo._id, testPlaceMarkInfo[i]);
+      await placeMarkService.createInfo(testInfo._id, testPlaceMarkInfo[i]);
     }
-    const returnedPlaylist = await playtimeService.getPlaylist(testInfo._id);
-    assert.equal(returnedPlaylist.info.length, testPlaceMarkInfo.length);
+    const returnedPlaceMark = await placeMarkService.getPlaceMark(testInfo._id);
+    assert.equal(returnedPlaceMark.infos.length, testPlaceMarkInfo.length);
     for (let i = 0; i < testPlaceMarkInfo.length; i += 1) {
-      assertSubset(testPlaceMarkInfo[i], returnedPlaylist.info[i]);
+      assertSubset(testPlaceMarkInfo[i], returnedPlaceMark.infos[i]);
     }
   });
 });

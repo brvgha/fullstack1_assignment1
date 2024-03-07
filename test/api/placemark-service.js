@@ -15,8 +15,12 @@ export const placeMarkService = {
   },
 
   async getAllUsers() {
-    const res = await axios.get(`${this.placeMarkUrl}/api/users`);
-    return res.data;
+    try {
+      const res = await axios.get(`${this.placeMarkUrl}/api/users`);
+      return res.data;
+    } catch(e) {
+      return null;
+    }
   },
 
   async deleteAllUsers() {
@@ -55,7 +59,7 @@ export const placeMarkService = {
   },
 
   async createInfo(id, info) {
-    const res = await axios.post(`${this.placeMarkUrl}/api/playlists/${id}/info`, info);
+    const res = await axios.post(`${this.placeMarkUrl}/api/placemarks/${id}/info`, info);
     return res.data;
   },
 
@@ -74,7 +78,7 @@ export const placeMarkService = {
     return res.data;
   },
 
-   async authenticate(user) {
+  async authenticate(user) {
     const response = await axios.post(`${this.placeMarkUrl}/api/users/authenticate`, user);
     axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
     return response.data;

@@ -1,26 +1,26 @@
 import { assert } from "chai";
 import { decodeToken } from "../../src/api/jwt-utils.js";
-import { maggie } from "../fixtures.js";
+import { maggie, maggieCredentials } from "../fixtures.js";
 import { placeMarkService } from "./placemark-service.js";
 
 suite("Authentication API tests", async () => {
   setup(async () => {
     placeMarkService.clearAuth();
     await placeMarkService.createUser(maggie);
-    await placeMarkService.authenticate(maggie);
+    await placeMarkService.authenticate(maggieCredentials);
     await placeMarkService.deleteAllUsers();
   });
 
   test("authenticate", async () => {
     const returnedUser = await placeMarkService.createUser(maggie);
-    const response = await placeMarkService.authenticate(maggie);
+    const response = await placeMarkService.authenticate(maggieCredentials);
     assert(response.success);
     assert.isDefined(response.token);
   });
 
   test("verify Token", async () => {
     const returnedUser = await placeMarkService.createUser(maggie);
-    const response = await placeMarkService.authenticate(maggie);
+    const response = await placeMarkService.authenticate(maggieCredentials);
 
     const userInfo = decodeToken(response.token);
     assert.equal(userInfo.email, returnedUser.email);

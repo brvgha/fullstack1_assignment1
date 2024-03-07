@@ -26,11 +26,11 @@ export const placeMarkApi = {
     auth: {
       strategy: "jwt",
     },
-      async handler(request) {
-        try {
-          const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-          if (!placemark) {
-            return Boom.notFound("No PlaceMark with this id");
+    async handler(request) {
+      try {
+        const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
+        if (!placemark) {
+          return Boom.notFound("No PlaceMark with this id");
         }
         return placemark;
       } catch (err) {
@@ -48,12 +48,12 @@ export const placeMarkApi = {
     auth: {
       strategy: "jwt",
     },
-      handler: async function (request, h) {
-        try {
-          const placemark = request.payload;
-          const newPlaceMark = await db.placeMarkStore.addPlaceMark(placemark);
-          if (newPlaceMark) {
-            return h.response(newPlaceMark).code(201);
+    handler: async function (request, h) {
+      try {
+        const placemark = request.payload;
+        const newPlaceMark = await db.placeMarkStore.addPlaceMark(placemark);
+        if (newPlaceMark) {
+          return h.response(newPlaceMark).code(201);
         }
         return Boom.badImplementation("error creating placemark");
       } catch (err) {

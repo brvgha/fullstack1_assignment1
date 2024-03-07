@@ -1,6 +1,6 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { UserArray, UserSpec, IdSpec } from "../models/joi-schemas.js";
+import { UserArray, UserSpec, IdSpec, UserSpecExt, JwtAuth, UserCredentialsSpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 import { createToken } from "./jwt-utils.js";
 
@@ -39,10 +39,10 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Get specific userApi",
-    notes: "Returns details of one userApi",
-    response: { schema: UserArray, failAction: validationError },
+    description: "Get specific user",
+    notes: "Returns details of one user",
     validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: UserSpecExt, failAction: validationError },
   },
 
   create: {
@@ -62,7 +62,7 @@ export const userApi = {
     description: "Create a User",
     notes: "Returns the newly created user",
     validate: { payload: UserSpec, failAction: validationError },
-    response: { schema: UserSpec, failAction: validationError },
+    response: { schema: UserSpecExt, failAction: validationError },
   },
 
   deleteAll: {
@@ -99,5 +99,10 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Authenticate  a User",
+    notes: "If user has valid email/password, create and return a JWT token",
+    validate: { payload: UserCredentialsSpec, failAction: validationError },
+    response: { schema: JwtAuth, failAction: validationError },
   }
 };

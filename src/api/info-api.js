@@ -10,7 +10,7 @@ export const infoApi = {
     },
     handler: async function (request, h) {
       try {
-        const info = await db.infoStore.getAllInfos();
+        const info = await db.infoStore.getAllInfo();
         return info;
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
@@ -72,7 +72,7 @@ export const infoApi = {
     },
     handler: async function (request, h) {
       try {
-        await db.infoStore.deleteAllInfos();
+        await db.infoStore.deleteAllInfo();
         return h.response().code(204);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");

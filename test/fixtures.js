@@ -1,10 +1,15 @@
-export const serviceUrl = "http://BrughaPC:3000";
+export const serviceUrl = "http://localhost:3000";
 
 export const maggie = {
-    firstName: "Maggie",
-    lastName: "Simpson",
-    email: "maggie@simpson.com",
-    password: "secret",
+  firstName: "Maggie",
+  lastName: "Simpson",
+  email: "maggie@simpson.com",
+  password: "secret",
+};
+
+export const maggieCredentials = {
+  email: "maggie@simpson.com",
+  password: "secret"
 };
   
 export const testUsers = [
@@ -47,8 +52,12 @@ export const mCollinsBridge = {
 export const bridge = {
   category: "Bridge",
   description: "Connects A to B",
-  analytics: "1250 visits per day"
+  analytics: "800 visits per day"
 };
+
+export const corkCity = {
+  name: "Cork City",
+}
 
 export const testPlaceMarkInfo = [
   {

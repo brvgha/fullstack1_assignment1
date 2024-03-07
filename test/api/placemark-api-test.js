@@ -3,7 +3,7 @@ import { assert } from "chai";
 import { placeMarkService } from "./placemark-service.js";
 import { assertSubset } from "../test-utils.js";
 
-import { mCollinsBridge, testPlaceMark, maggie } from "../fixtures.js";
+import { mCollinsBridge, testPlaceMark, maggie, maggieCredentials } from "../fixtures.js";
 
 EventEmitter.setMaxListeners(25);
 
@@ -13,11 +13,11 @@ suite("Placemark API tests", () => {
   setup(async () => {
     placeMarkService.clearAuth();
     user = await placeMarkService.createUser(maggie);
-    await placeMarkService.authenticate(maggie);
+    await placeMarkService.authenticate(maggieCredentials);
     await placeMarkService.deleteAllPlaceMarks();
     await placeMarkService.deleteAllUsers();
     user = await placeMarkService.createUser(maggie);
-    await placeMarkService.authenticate(maggie);    
+    await placeMarkService.authenticate(maggieCredentials);    
     mCollinsBridge.userid = user._id;
   });
 
