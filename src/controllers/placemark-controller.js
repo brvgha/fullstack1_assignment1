@@ -15,7 +15,6 @@ export const placemarkController = {
       let updated;
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
       const details = await getPOIInfo(placemark.name, placemark.city, placemark.country);
-      console.log(details);
       if (details !== undefined) {
         placemark.lat = details.lat;
         placemark.lng = details.lon;

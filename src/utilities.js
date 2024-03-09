@@ -11,8 +11,6 @@ export const getPOIInfo = async (loc, city, country) => {
     }
 }
 
-// export const getDisplayName = async()
-
 export const getWeather = async (lat, lng) => {
     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.weather[0].main;
