@@ -1,14 +1,24 @@
+import axios from "axios";
+import dotenv from "dotenv";
 import { db } from "../models/db.js";
 import { infoSpec } from "../models/joi-schemas.js";
 import { imageStore } from "../models/image-store.js";
+import { addWeatherMeticsToPlaceMark, getMaxTemp, getMinTemp, getTemp, getWeather } from "../utilities.js";
+
+
+
+const result = dotenv.config();
 
 export const placemarkController = {
   index: {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
+      const updated = await addWeatherMeticsToPlaceMark(placemark);
       const viewData = {
         title: "PlaceMark",
-        placemark: placemark,
+        placemark: updated,
+        lat: updated.lat,
+        lng: updated.lng,
       };
       return h.view("placemark-view", viewData);
     },

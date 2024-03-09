@@ -1,14 +1,51 @@
 {{> menu}}
-
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
-    <div class="title">
+    <div class="title" style="font-size: xx-large;">
       {{placemark.name}}
+    </div>
+    <div style="display: flex; justify-content: center;">
+  <iframe  src="https://maps.google.com/maps?q={{lat}},{{lng}}&z=15&output=embed" width="400" height="320" style="border:0;"></iframe>
     </div>
     {{> list-infos }}
     {{> add-info }}
   </div>
 </section>
+<section class="section columns is-vcentered">
+  <div class="column has-text-centered">
+    <div class="title">
+      <p>Current Weather</p>
+    </div>
+    <p style="font-size: 32px;">{{placemark.weather}}</p>
+    <table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Temperature(&deg;C)</th>
+      <th>Temperature(&deg;F)</th>
+      <th>Wind Speed</th>
+      <th>Wind Direction</th>
+      <th>Humidity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{placemark.temp}}<br>
+        Min: {{placemark.min_temp}}<br>
+        Max: {{placemark.max_temp}}
+      </td>
+      <td>{{placemark.tempF}}</td>
+      <td>{{placemark.wind_speed}}</td>
+      <td>{{placemark.wind_direction_deg}}&deg; {{placemark.wind_direction_txt}}</td>
+      <td>{{placemark.humidity}}</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</section>
 <div class="section">
     {{> placemark-image }}
 </div>
+
+  <body>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+  </body>
