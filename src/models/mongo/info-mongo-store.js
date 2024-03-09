@@ -6,6 +6,7 @@ export const infoMongoStore = {
     const info = await Info.find({ placemarkid: id }).lean();
     return info;
   },
+  
   async getAllInfo() {
     const info = await Info.find().lean();
     return info;
