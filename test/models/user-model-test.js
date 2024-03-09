@@ -14,6 +14,10 @@ suite("User Model tests", () => {
     }
   });
 
+  teardown(async () => {
+    await db.userStore.deleteAll();
+  });
+
   test("create a user", async () => {
     const newUser = await db.userStore.addUser(maggie);
     assertSubset(maggie, newUser)

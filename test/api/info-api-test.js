@@ -20,7 +20,9 @@ suite("Info API tests", () => {
     testInfo = await placeMarkService.createPlaceMark(mCollinsBridge);  
   });
 
-  teardown(async () => {});
+  teardown(async () => {
+    await placeMarkService.deleteAllInfo();
+  });
 
   test("create info", async () => {
 		const returnedInfo = await placeMarkService.createInfo(testInfo._id, bridge);

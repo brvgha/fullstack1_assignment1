@@ -20,7 +20,9 @@ suite("User API tests", () => {
     await placeMarkService.authenticate(maggieCredentials);
   });
 
-  teardown(async () => {});
+  teardown(async () => {
+    await placeMarkService.deleteAllUsers();
+  });
 
   test("create a user", async () => {
     const newUser = await placeMarkService.createUser(maggie);

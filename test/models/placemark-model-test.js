@@ -16,6 +16,10 @@ suite("Placemark Model tests", () => {
     }
   });
 
+  teardown(async () => {
+    await db.placeMarkStore.deleteAllPlaceMarks();
+  });
+
   test("create a placemark", async () => {
     const placemark = await db.placeMarkStore.addPlaceMark(mCollinsBridge);
     assertSubset(mCollinsBridge, placemark);

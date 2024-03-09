@@ -11,6 +11,13 @@ suite("Authentication API tests", async () => {
     await placeMarkService.deleteAllUsers();
   });
 
+  teardown(async () => {
+    placeMarkService.clearAuth();
+    await placeMarkService.createUser(maggie);
+    await placeMarkService.authenticate(maggieCredentials);
+    await placeMarkService.deleteAllUsers();
+  });
+
   test("authenticate", async () => {
     const returnedUser = await placeMarkService.createUser(maggie);
     const response = await placeMarkService.authenticate(maggieCredentials);
@@ -21,7 +28,6 @@ suite("Authentication API tests", async () => {
   test("verify Token", async () => {
     const returnedUser = await placeMarkService.createUser(maggie);
     const response = await placeMarkService.authenticate(maggieCredentials);
-
     const userInfo = decodeToken(response.token);
     assert.equal(userInfo.email, returnedUser.email);
     assert.equal(userInfo.userId, returnedUser._id);

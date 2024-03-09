@@ -21,7 +21,9 @@ suite("Placemark API tests", () => {
     mCollinsBridge.userid = user._id;
   });
 
-  teardown(async () => {});
+  teardown(async () => {
+    await placeMarkService.deleteAllPlaceMarks();
+  });
 
   test("create Placemark", async () => {
     const returnedPlaceMark = await placeMarkService.createPlaceMark(mCollinsBridge);
