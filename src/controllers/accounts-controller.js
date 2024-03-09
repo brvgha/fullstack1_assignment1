@@ -1,5 +1,8 @@
-import { UserSpec, UserCredentialsSpec} from "../models/joi-schemas.js";
+import dotenv from "dotenv";
+import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+
+const result = dotenv.config();
 
 export const accountsController = {
   index: {
@@ -31,7 +34,7 @@ export const accountsController = {
     },
     handler: async function (request, h) {
       const user = request.payload;
-      if (user.email === "20104109@mail.wit.ie") {
+      if (user.email === process.env.website_login) {
         user.type = "admin"
       } else {
         user.type = "user";

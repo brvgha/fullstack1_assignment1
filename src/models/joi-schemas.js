@@ -27,6 +27,7 @@ export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");
 
 export const infoSpec = Joi.object()
   .keys({
+    name: Joi.string().required().example("Michael Collin's Bridge"),
     description: Joi.string().allow("").optional().example("Connects Street X to Street Y"),
     lat: Joi.number().required().example(51.42),
     lng: Joi.number().required().example(51.42),

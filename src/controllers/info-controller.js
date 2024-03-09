@@ -29,6 +29,7 @@ export const infoController = {
     handler: async function (request, h) {
       const info = await db.infoStore.getInfoById(request.params.infoid);
       const newInfo = {
+        name: request.payload.name,
         category: request.payload.category,
         description: request.payload.description,
         lat: request.payload.lat,

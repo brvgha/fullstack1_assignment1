@@ -3,6 +3,7 @@ import Mongoose from "mongoose";
 const { Schema } = Mongoose;
 
 const infoSchema = new Schema({
+  name: String,
   category: String,
   description: String,
   analytics: String,

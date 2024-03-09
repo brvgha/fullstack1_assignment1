@@ -74,6 +74,7 @@ export const mCollinsBridge = {
 };
 
 export const bridge = {
+  name: "Michael Collin's Bridge",
   category: "Bridge",
   description: "Connects A to B",
   analytics: Number("800"),
@@ -88,6 +89,7 @@ export const corkCity = {
 
 export const testPlaceMarkInfo = [
   {
+    name: "Michael Collin's Bridge",
     category: "Bridge",
     description: "Connects A to B",
     analytics: Number("1250"),
@@ -95,13 +97,15 @@ export const testPlaceMarkInfo = [
     lng: Number("-104.56"),
   },
   {
+    name: "The Elysian",
     category: "Building",
-    description: "Home of the President of Ireland",
+    description: "Tallest Building in Ireland",
     analytics: Number("2356"),
     lat: Number("51.46"),
     lng: Number("-104.56"),
   },
   {
+    name: "Béal na mBláth,",
     category: "Landmark",
     description: "Commemoration of 1916",
     analytics: Number("800"),

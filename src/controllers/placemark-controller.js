@@ -31,6 +31,7 @@ export const placemarkController = {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
       const newInfo = {
+        name: request.payload.name,
         category: request.payload.category,
         description: request.payload.description,
         analytics: request.payload.analytics,

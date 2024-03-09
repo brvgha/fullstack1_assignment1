@@ -1,5 +1,6 @@
 import { PlaceMark } from "./placemark.js";
 import { infoMongoStore } from "./info-mongo-store.js";
+import { Info } from "./info.js";
 
 export const placeMarkMongoStore = {
   async getAllPlaceMarks() {
@@ -31,7 +32,15 @@ export const placeMarkMongoStore = {
 
   async deletePlaceMarkById(id) {
     try {
+      if (id) {
+        const infos = await infoMongoStore.getInfoByPlaceMarkId(id)
+        for (let i = 0; i < infos.length; i += 1){
+          // eslint-disable-next-line no-await-in-loop
+          await Info.deleteOne({ _id: infos[i]._id})
+      } 
+      }
       await PlaceMark.deleteOne({ _id: id });
+      
     } catch (error) {
       console.log("bad id");
     }
