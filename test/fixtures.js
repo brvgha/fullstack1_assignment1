@@ -5,6 +5,7 @@ export const maggie = {
   lastName: "Simpson",
   email: "maggie@simpson.com",
   password: "secret",
+  type: "user",
 };
 
 export const barney = {
@@ -12,6 +13,15 @@ export const barney = {
   lastName: "Gumble",
   email: "barney@gumble.com",
   password: "1234",
+  type: "user",
+}
+
+export const lisa = {
+  firstName: "Lisa",
+  lastName: "Simpson",
+  email: "lisa@simpson.com",
+  password: "1234",
+  type: "admin",
 }
 
 export const maggieCredentials = {
@@ -25,63 +35,79 @@ export const testUsers = [
     lastName: "Simpson",
     email: "homer@simpson.com",
     password: "secret",
+    type: "user"
   },
   {
     firstName: "Marge",
     lastName: "Simpson",
     email: "marge@simpson.com",
     password: "secret",
+    type: "user"
   },
   {
     firstName: "Bart",
     lastName: "Simpson",
     email: "bart@simpson.com",
     password: "secret",
+    type: "user"
   },
 ];
 
 export const testPlaceMark = [
     {
-        name: "Place X"
+      name: "Place X",
+      img: "",
+      city: "Cork",
+      country: "Ireland"
     },
     {
-        name: "Place Y"
+      name: "Place Y",
+      img: "",
+      city: "Cork",
+      country: "Ireland"
     },
     {
-        name: "Place Z"
+      name: "Place Z",
+      img: "",
+      city: "Cork",
+      country: "Ireland"
     }
 ];
 
 export const mCollinsBridge = {
   name: "Michael Collin's Bridge",
-  img : "",
+  img: "",
+  city: "Cork",
+  country: "Ireland"
 };
 
 export const bridge = {
   category: "Bridge",
   description: "Connects A to B",
-  analytics: "800 visits per day"
-};
+  analytics: Number("800"),
+}
 
 export const corkCity = {
-  name: "Cork City",
+  name: "The Elysian",
   img: "",
-}
+  city: "Cork",
+  country: "Ireland"
+};
 
 export const testPlaceMarkInfo = [
   {
     category: "Bridge",
     description: "Connects A to B",
-    analytics: "1250 visits per day"
+    analytics: Number("1250"),
   },
   {
     category: "Building",
-    description: "Home of the President of Ireland",
-    analytics: "2356 visits per day"
+    description: "Tallest Building in Ireland",
+    analytics: Number("2356"),
   },
   {
     category: "Landmark",
     description: "Commemoration of 1916",
-    analytics: "800 visits per day"
+    analytics: Number("800"),
   },
 ];

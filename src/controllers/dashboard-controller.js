@@ -32,8 +32,10 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const newPlaceMark = {
-          userid: loggedInUser._id,
-          name: request.payload.name,
+        userid: loggedInUser._id,
+        name: request.payload.name,
+        city: request.payload.city,
+        country: request.payload.country,
       };
       await db.placeMarkStore.addPlaceMark(newPlaceMark);
       return h.redirect("/dashboard");
@@ -43,7 +45,7 @@ export const dashboardController = {
   deletePlaceMark: {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-      await db.placeMarkStore.deletePlaceMarkById(placemark.id);
+      await db.placeMarkStore.deletePlaceMarkById(placemark._id);
       return h.redirect("/dashboard");
     },
   },

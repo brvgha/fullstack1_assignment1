@@ -6,9 +6,9 @@ export const IdSpec = Joi.alternatives()
 
 export const UserCredentialsSpec = Joi.object()
   .keys({
-    
     email: Joi.string().email().example("homer@simpson.com").required(),
     password: Joi.string().example("secret1234?").required(),
+    type: Joi.string().optional()
   })
   .label("UserCredentials");
 
@@ -20,15 +20,16 @@ export const UserSpec = UserCredentialsSpec.keys({
 export const UserSpecExt = UserSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  
 }).label("UserDetailsExt");
 
 export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");
 
 export const infoSpec = Joi.object()
   .keys({
-    category: Joi.string().required().example("Bridge"),
     description: Joi.string().allow("").optional().example("Connects Street X to Street Y"),
-    analytics: Joi.string().allow("").optional().example("900 visits per day"),
+    category: Joi.string().required().example("Bridge"),
+    analytics: Joi.number().allow("").optional().example(900),
     placemarkid: IdSpec
   })
   .label("InfoSpec")
@@ -45,7 +46,9 @@ export const infoSpecArray = Joi.array()
 
 export const placeMarkSpec = Joi.object()
   .keys({
-    name: Joi.string().example("Cork City").required(),
+    name: Joi.string().example("The Elysian").required(),
+    city: Joi.string().example("Cork").required(),
+    country: Joi.string().example("Ireland").required(),
     img: Joi.string().optional().allow(""),
     userid: IdSpec,
     infos: infoSpecArray

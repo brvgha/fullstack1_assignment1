@@ -16,6 +16,10 @@ suite("Placemark Model tests", () => {
     }
   });
 
+  teardown(async () => {
+    await db.placeMarkStore.deleteAllPlaceMarks();
+  });
+
   test("create a placemark", async () => {
     const placemark = await db.placeMarkStore.addPlaceMark(mCollinsBridge);
     assertSubset(mCollinsBridge, placemark);
@@ -39,10 +43,13 @@ suite("Placemark Model tests", () => {
 	test("delete One Placemark - success", async () => {
     const id = testPlaceMark[0]._id;
     await db.placeMarkStore.deletePlaceMarkById(id);
+    const placeMarkInfo = await db.infoStore.getInfoByPlaceMarkId(id);
 		const returnedPlacemarks = await db.placeMarkStore.getAllPlaceMarks();
     assert.equal(returnedPlacemarks.length, testPlaceMark.length - 1);
 		const deletedPlacemark = await db.placeMarkStore.getPlaceMarkById(id);
     assert.isNull(deletedPlacemark);
+    await db.infoStore.deleteInfo(placeMarkInfo._id);
+    assert.isNull(await db.infoStore.getInfoById(placeMarkInfo._id));
   });
 
   test("get a placemark - bad params", async () => {

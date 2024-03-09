@@ -62,7 +62,7 @@ export const infoApi = {
     tags: ["api"],
     description: "Create info",
     notes: "Returns the newly created info",
-    validate: { payload: infoSpec },
+    validate: { payload: infoSpec, failAction: validationError },
     response: { schema: infoSpecExt, failAction: validationError },
   },
 

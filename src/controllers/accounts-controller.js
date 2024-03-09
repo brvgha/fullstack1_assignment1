@@ -1,5 +1,8 @@
-import { UserSpec, UserCredentialsSpec} from "../models/joi-schemas.js";
+import dotenv from "dotenv";
+import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+
+const result = dotenv.config();
 
 export const accountsController = {
   index: {
@@ -31,6 +34,11 @@ export const accountsController = {
     },
     handler: async function (request, h) {
       const user = request.payload;
+      if (user.email === process.env.website_login) {
+        user.type = "admin"
+      } else {
+        user.type = "user";
+      }
       await db.userStore.addUser(user);
       return h.redirect("/");
     },
@@ -61,10 +69,14 @@ export const accountsController = {
       const user = await db.userStore.getUserByEmail(email);
       if (!user || user.password !== password) {
         return h.redirect("/");
+      };
+      if (user.type === "admin") {
+        request.cookieAuth.set({ id: user._id });
+        return h.redirect("/admin");
       }
       request.cookieAuth.set({ id: user._id });
       return h.redirect("/dashboard");
-    },
+    }
   },
   logout: {
     handler: function (request, h) {

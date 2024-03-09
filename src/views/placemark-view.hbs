@@ -1,15 +1,63 @@
 {{> menu}}
-
+<section class="section columns is-vcentered">
+  <div class="column has-text-centered">
+    <div class="title" style="font-size: xx-large;">
+      {{placemark.name}} <br>
+      
+    </div>
+    <div class="error">
+    {{#if placemark.error}}
+      <p style="font-size: larger;"><b>Error 404 - PoI not found...</p></b><p><br>You can still add information until the address has been added to the database.</p>
+      <p>We apologise for this error!</p>
+    {{else}}
+    </div>
+    
+    <div style="display: flex; justify-content: center;">
+      <iframe  src="https://maps.google.com/maps?q={{placemark.lat}},{{placemark.lng}}&z=15&output=embed" width="400" height="320" style="border:0;"></iframe>
+    </div>
+    {{/if}}
+    {{> list-infos }}
+    {{> add-info }}
+  </div>
+</section>
+{{#if placemark.error}}
+{{else}}
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
     <div class="title">
-      {{placemark.name}}
+      <p>Current Weather</p>
     </div>
-    {{> list-infos}}
-    {{> add-info}}
+    <p style="font-size: 32px;">{{placemark.weather}}</p>
+    <table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th class="has-text-centered">Temperature(&deg;C)</th>
+      <th class="has-text-centered">Temperature(&deg;F)</th>
+      <th class="has-text-centered">Wind Speed</th>
+      <th class="has-text-centered">Wind Direction</th>
+      <th class="has-text-centered">Humidity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{placemark.temp}}<br>
+        Min: {{placemark.min_temp}}<br>
+        Max: {{placemark.max_temp}}
+      </td>
+      <td>{{placemark.tempF}}</td>
+      <td>{{placemark.wind_speed}}</td>
+      <td>{{placemark.wind_direction_deg}}&deg; {{placemark.wind_direction_txt}}</td>
+      <td>{{placemark.humidity}}</td>
+    </tr>
+  </tbody>
+</table>
   </div>
-  <div class="column">
+</section>
+{{/if}}
+<div class="section">
     {{> placemark-image }}
-  </div>
-</section>
-</section>
+</div>
+
+  <body>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+  </body>

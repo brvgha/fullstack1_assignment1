@@ -19,6 +19,10 @@ suite("Information Model tests", () => {
         }
     });
 
+    teardown(async () => {
+        await db.infoStore.deleteAllInfo();
+    });
+
     test("create single info", async () => {
         await db.infoStore.addInfo(testPlaceMarkList._id,bridge);
         const info = await db.infoStore.getAllInfo();

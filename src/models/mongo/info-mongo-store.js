@@ -39,9 +39,9 @@ export const infoMongoStore = {
   },
 
   async updateInfo(info, updatedInfo) {
-    info.title = updatedInfo.title;
-    info.artist = updatedInfo.artist;
-    info.duration = updatedInfo.duration;
+    info.description = updatedInfo.description;
+    info.category = updatedInfo.category;
+    info.analytics = updatedInfo.analytics;
     await info.save();
   },
 };
