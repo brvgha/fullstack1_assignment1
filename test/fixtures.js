@@ -56,60 +56,58 @@ export const testUsers = [
 export const testPlaceMark = [
     {
       name: "Place X",
-      img : "",
+      img: "",
+      city: "Cork",
+      country: "Ireland"
     },
     {
       name: "Place Y",
-      img : "",
+      img: "",
+      city: "Cork",
+      country: "Ireland"
     },
     {
       name: "Place Z",
-      img : "",
+      img: "",
+      city: "Cork",
+      country: "Ireland"
     }
 ];
 
 export const mCollinsBridge = {
   name: "Michael Collin's Bridge",
-  img : "",
+  img: "",
+  city: "Cork",
+  country: "Ireland"
 };
 
 export const bridge = {
-  name: "Michael Collin's Bridge",
   category: "Bridge",
   description: "Connects A to B",
   analytics: Number("800"),
-  lat: Number("51.46"),
-  lng: Number("-104.56"),
-};
+}
 
 export const corkCity = {
-  name: "Cork City",
+  name: "The Elysian",
   img: "",
-}
+  city: "Cork",
+  country: "Ireland"
+};
 
 export const testPlaceMarkInfo = [
   {
-    name: "Michael Collin's Bridge",
     category: "Bridge",
     description: "Connects A to B",
     analytics: Number("1250"),
-    lat: Number("51.46"),
-    lng: Number("-104.56"),
   },
   {
-    name: "The Elysian",
     category: "Building",
     description: "Tallest Building in Ireland",
     analytics: Number("2356"),
-    lat: Number("51.46"),
-    lng: Number("-104.56"),
   },
   {
-    name: "Béal na mBláth,",
     category: "Landmark",
     description: "Commemoration of 1916",
     analytics: Number("800"),
-    lat: Number("51.46"),
-    lng: Number("-104.56"),
   },
 ];

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { db } from "../models/db.js";
 import { infoSpec } from "../models/joi-schemas.js";
 import { imageStore } from "../models/image-store.js";
-import { addWeatherMeticsToPlaceMark, getMaxTemp, getMinTemp, getTemp, getWeather } from "../utilities.js";
+import { addWeatherMeticsToPlaceMark, getPOIInfo } from "../utilities.js";
 
 
 
@@ -12,17 +12,28 @@ const result = dotenv.config();
 export const placemarkController = {
   index: {
     handler: async function (request, h) {
+      let updated;
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-      const updated = await addWeatherMeticsToPlaceMark(placemark);
+      const details = await getPOIInfo(placemark.name, placemark.city, placemark.country);
+      console.log(details);
+      if (details !== undefined) {
+        placemark.lat = details.lat;
+        placemark.lng = details.lon;
+        updated = await addWeatherMeticsToPlaceMark(placemark);
+        const viewData = {
+          title: "PlaceMark",
+          placemark: updated,
+        };
+        return h.view("placemark-view", viewData);
+      }
+      placemark.error = true;
       const viewData = {
-        title: "PlaceMark",
-        placemark: updated,
-        lat: updated.lat,
-        lng: updated.lng,
+      title: "PlaceMark",
+      placemark: placemark
       };
       return h.view("placemark-view", viewData);
+      }
     },
-  },
 
   addInfo: {
     validate: {
@@ -45,8 +56,6 @@ export const placemarkController = {
         category: request.payload.category,
         description: request.payload.description,
         analytics: request.payload.analytics,
-        lat: request.payload.lat,
-        lng: request.payload.lng
       };
       await db.infoStore.addInfo(placemark._id, newInfo);
       return h.redirect(`/placemark/${placemark._id}`);

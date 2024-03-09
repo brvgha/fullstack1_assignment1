@@ -27,10 +27,7 @@ export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");
 
 export const infoSpec = Joi.object()
   .keys({
-    name: Joi.string().required().example("Michael Collin's Bridge"),
     description: Joi.string().allow("").optional().example("Connects Street X to Street Y"),
-    lat: Joi.number().required().example(51.42),
-    lng: Joi.number().required().example(51.42),
     category: Joi.string().required().example("Bridge"),
     analytics: Joi.number().allow("").optional().example(900),
     placemarkid: IdSpec
@@ -49,7 +46,9 @@ export const infoSpecArray = Joi.array()
 
 export const placeMarkSpec = Joi.object()
   .keys({
-    name: Joi.string().example("Cork City").required(),
+    name: Joi.string().example("The Elysian").required(),
+    city: Joi.string().example("Cork").required(),
+    country: Joi.string().example("Ireland").required(),
     img: Joi.string().optional().allow(""),
     userid: IdSpec,
     infos: infoSpecArray

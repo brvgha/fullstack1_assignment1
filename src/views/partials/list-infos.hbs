@@ -1,20 +1,14 @@
 <table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Visits</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
+  <thead 
+    <tr class="has-text-centered">
+      <th class="has-text-centered">Category</th>
+      <th class="has-text-centered">Description</th>
+      <th class="has-text-centered">Visits</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="has-text-centered">
     {{#each placemark.infos}}
     <tr>
-      <td>
-        {{name}}
-      </td>
       <td>
         {{category}}
       </td>
@@ -23,12 +17,6 @@
       </td>
       <td>
         {{analytics}}
-      </td>
-      <td>
-        {{lat}}
-      </td>
-      <td>
-        {{lng}}
       </td>
       <td>
         <a href="/placemark/{{../placemark._id}}/deleteinfo/{{_id}}" class="button">

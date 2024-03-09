@@ -1,56 +1,50 @@
 import axios from "axios";
 import dotenv from "dotenv";
-// import Client from "@googlemaps/google-maps-services-js"
 
 const result = dotenv.config();
 
-export const removeCity = async (name) => {
-    name = name.replace("City", "");
-    return name
+export const getPOIInfo = async (loc, city, country) => {
+    const searchString = loc + "%20" + city + "%20" + country;
+    const response = await axios.get(`https://geocode.maps.co/search?q=${searchString}&api_key=${process.env.geocodeapi_key}`);
+    if (response.status === 200) {
+        return response.data[0]
+    }
 }
 
-export const getWeather = async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+// export const getDisplayName = async()
+
+export const getWeather = async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.weather[0].main;
 }
 
-export const getTemp = async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+export const getTemp = async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.main.temp - 273.15; // convert from Kelvin
 }
 
-export const getMinTemp = async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+export const getMinTemp = async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.main.temp_min - 273.15; // convert from Kelvin
 }
-export const getMaxTemp = async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+export const getMaxTemp = async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.main.temp_max - 273.15; // convert from Kelvin
 }
 
-export const getWindSpeed = async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+export const getWindSpeed = async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.wind.speed;
 }
 
-export const getWindDirection= async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+export const getWindDirection= async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.wind.deg;
 }
 
-export const getHumidity= async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
+export const getHumidity= async (lat, lng) => {
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.main.humidity;
-}
-
-export const getLat= async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
-    return response.data.coord.lat;
-}
-
-export const getLng= async (name) => {
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${process.env.openweatherapi_key}`);
-    return response.data.coord.lon;
 }
 
 export const celsiusToFahr = async (temp) => (temp * 9 / 5) + 32
@@ -92,6 +86,7 @@ export const convertDegToDirection = async (deg) => {
     return null;
 }
 
+/* unfinished
 export const getMapData = async (lat, lng) => {
     const client = new Client({});
     const res = await client.geocode({
@@ -100,20 +95,17 @@ export const getMapData = async (lat, lng) => {
             key: (process.env.googlemapsapi_key),
         }
     });
-}
+} */
 
 export const addWeatherMeticsToPlaceMark = async (placemark) => {
-    const updatedName = await removeCity(placemark.name)
-    placemark.weather = await getWeather(updatedName);
-    placemark.temp = Number((await getTemp(updatedName)).toFixed(2));
+    placemark.weather = await getWeather(placemark.lat, placemark.lng);
+    placemark.temp = Number((await getTemp(placemark.lat, placemark.lng)).toFixed(2));
     placemark.tempF = Number((await celsiusToFahr(placemark.temp)).toFixed(2));
-    placemark.min_temp = Number((await getMinTemp(updatedName)).toFixed(2));
-    placemark.max_temp = Number((await getMaxTemp(updatedName)).toFixed(2));
-    placemark.wind_speed = Number((await getWindSpeed(updatedName)).toFixed(2));
-    placemark.wind_direction_deg = await getWindDirection(updatedName);
+    placemark.min_temp = Number((await getMinTemp(placemark.lat, placemark.lng)).toFixed(2));
+    placemark.max_temp = Number((await getMaxTemp(placemark.lat, placemark.lng)).toFixed(2));
+    placemark.wind_speed = Number((await getWindSpeed(placemark.lat, placemark.lng)).toFixed(2));
+    placemark.wind_direction_deg = await getWindDirection(placemark.lat, placemark.lng);
     placemark.wind_direction_txt = await convertDegToDirection(placemark.wind_direction_deg);
-    placemark.humidity = Number((await getHumidity(updatedName)).toFixed(2));
-    placemark.lat = await getLat(updatedName);
-    placemark.lng = await getLng(updatedName);
+    placemark.humidity = Number((await getHumidity(placemark.lat, placemark.lng)).toFixed(2));
     return placemark;
 }

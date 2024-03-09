@@ -32,8 +32,10 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const newPlaceMark = {
-          userid: loggedInUser._id,
-          name: request.payload.name,
+        userid: loggedInUser._id,
+        name: request.payload.name,
+        city: request.payload.city,
+        country: request.payload.country,
       };
       await db.placeMarkStore.addPlaceMark(newPlaceMark);
       return h.redirect("/dashboard");

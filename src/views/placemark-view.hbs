@@ -2,15 +2,26 @@
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
     <div class="title" style="font-size: xx-large;">
-      {{placemark.name}}
+      {{placemark.name}} <br>
+      
     </div>
+    <div class="error">
+    {{#if placemark.error}}
+      <p style="font-size: larger;"><b>Error 404 - PoI not found...</p></b><p><br>You can still add information until the address has been added to the database.</p>
+      <p>We apologise for this error!</p>
+    {{else}}
+    </div>
+    
     <div style="display: flex; justify-content: center;">
-  <iframe  src="https://maps.google.com/maps?q={{lat}},{{lng}}&z=15&output=embed" width="400" height="320" style="border:0;"></iframe>
+      <iframe  src="https://maps.google.com/maps?q={{placemark.lat}},{{placemark.lng}}&z=15&output=embed" width="400" height="320" style="border:0;"></iframe>
     </div>
+    {{/if}}
     {{> list-infos }}
     {{> add-info }}
   </div>
 </section>
+{{#if placemark.error}}
+{{else}}
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
     <div class="title">
@@ -20,11 +31,11 @@
     <table class="table is-fullwidth">
   <thead>
     <tr>
-      <th>Temperature(&deg;C)</th>
-      <th>Temperature(&deg;F)</th>
-      <th>Wind Speed</th>
-      <th>Wind Direction</th>
-      <th>Humidity</th>
+      <th class="has-text-centered">Temperature(&deg;C)</th>
+      <th class="has-text-centered">Temperature(&deg;F)</th>
+      <th class="has-text-centered">Wind Speed</th>
+      <th class="has-text-centered">Wind Direction</th>
+      <th class="has-text-centered">Humidity</th>
     </tr>
   </thead>
   <tbody>
@@ -42,6 +53,7 @@
 </table>
   </div>
 </section>
+{{/if}}
 <div class="section">
     {{> placemark-image }}
 </div>
