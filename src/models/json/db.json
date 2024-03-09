@@ -20,6 +20,14 @@
       "email": "bart@simpson.com",
       "password": "secret",
       "_id": "3a6e2d6b-d518-4984-8af0-987ef9ebea21"
+    },
+    {
+      "firstName": "Brugha",
+      "lastName": "Fitzpatrick",
+      "email": "20104109@mail.wit.ie",
+      "password": "verysecretpassword",
+      "type": "admin",
+      "_id": "a337e076-2643-4b35-adf1-72f1f7cf8318"
     }
   ],
   "placemarks": [
