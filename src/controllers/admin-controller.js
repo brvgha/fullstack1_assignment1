@@ -21,15 +21,15 @@ export const adminController = {
   deleteUser: {
     handler: async function (request, h) {
       const user = await db.userStore.getUserById(request.params.id);
-      await db.userStore.deleteUserById(user.id);
+      await db.userStore.deleteUserById(user._id);
       return h.redirect("/admin");
     }
   },
 
   deleteInfo: {
     handler: async function (request, h) {
-      const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-      await db.infoStore.deleteInfo(request.params.infoid);
+      const info = await db.infoStore.getInfoById(request.params.id);
+      await db.infoStore.deleteInfo(info._id);
       return h.redirect("/admin");
     },
   },
@@ -37,7 +37,7 @@ export const adminController = {
   deletePlaceMark: {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-      await db.placeMarkStore.deletePlaceMarkById(placemark.id);
+      await db.placeMarkStore.deletePlaceMarkById(placemark._id);
       return h.redirect("/admin");
     },
   },
