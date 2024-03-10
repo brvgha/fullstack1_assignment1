@@ -8,7 +8,6 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const placemarks = await db.placeMarkStore.getUserPlaceMarks(loggedInUser._id);
       const sortedPlaceMarks = await sortPlacemark(placemarks);
-      console.log(sortedPlaceMarks)
       const viewData = {
         title: "PlaceMark Dashboard",
         user: loggedInUser,
