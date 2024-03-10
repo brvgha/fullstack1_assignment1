@@ -12,6 +12,8 @@ export const getPOIInfo = async (loc, city, country) => {
     return null
 }
 
+export const sortPlacemark = async (placemarks) => placemarks.sort((a, b) => a.name.localeCompare(b.name))
+
 export const getWeather = async (lat, lng) => {
     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${process.env.openweatherapi_key}`);
     return response.data.weather[0].main;

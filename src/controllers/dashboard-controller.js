@@ -1,15 +1,18 @@
 import { db } from "../models/db.js";
 import { placeMarkSpec } from "../models/joi-schemas.js";
+import { sortPlacemark } from "../utilities.js";
 
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const placemarks = await db.placeMarkStore.getUserPlaceMarks(loggedInUser._id);
+      const sortedPlaceMarks = await sortPlacemark(placemarks);
+      console.log(sortedPlaceMarks)
       const viewData = {
         title: "PlaceMark Dashboard",
         user: loggedInUser,
-        placemarks: placemarks,
+        placemarks: sortedPlaceMarks,
       };
       return h.view("dashboard-view", viewData);
     },
