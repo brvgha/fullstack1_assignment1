@@ -4,11 +4,12 @@ import dotenv from "dotenv";
 const result = dotenv.config();
 
 export const getPOIInfo = async (loc, city, country) => {
-    const searchString = loc + "%20" + city + "%20" + country;
+    const searchString = `${loc  }%20${  city  }%20${  country}`;
     const response = await axios.get(`https://geocode.maps.co/search?q=${searchString}&api_key=${process.env.geocodeapi_key}`);
     if (response.status === 200) {
         return response.data[0]
     }
+    return null
 }
 
 export const getWeather = async (lat, lng) => {
