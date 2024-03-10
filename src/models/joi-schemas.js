@@ -23,6 +23,14 @@ export const UserSpecExt = UserSpec.keys({
   
 }).label("UserDetailsExt");
 
+export const UserUpdateSpec = Joi.object()
+  .keys({
+    firstName: Joi.string().example("Homer").required(),
+    lastName: Joi.string().example("Simpson").required(),
+    password: Joi.string().example("secret1234").required(),
+  })
+  .label("UserUpdateDetails")
+
 export const UserArray = Joi.array().items(UserSpecExt).label("UserArray");
 
 export const infoSpec = Joi.object()

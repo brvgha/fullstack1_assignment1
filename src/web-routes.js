@@ -3,6 +3,7 @@ import { dashboardController } from "./controllers/dashboard-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
 import { placemarkController } from "./controllers/placemark-controller.js";
 import { adminController } from "./controllers/admin-controller.js";
+import { infoController } from "./controllers/info-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -11,6 +12,8 @@ export const webRoutes = [
   { method: "GET", path: "/logout", config: accountsController.logout },
   { method: "POST", path: "/register", config: accountsController.signup },
   { method: "POST", path: "/authenticate", config: accountsController.login },
+  { method: "GET", path: "/user", config: accountsController.account },
+  { method: "POST", path: "/user/updateuser/{id}", config: accountsController.update },
 
   { method: "GET", path: "/about", config: aboutController.index },
 
@@ -26,8 +29,11 @@ export const webRoutes = [
   { method: "GET", path: "/placemark/{id}", config: placemarkController.index },
   { method: "POST", path: "/placemark/{id}/addinfo", config: placemarkController.addInfo },
   { method: "GET", path: "/placemark/{id}/deleteinfo/{infoid}", config: placemarkController.deleteInfo },
+
+  { method: "GET", path: "/info/{id}/editinfo/{infoid}", config: infoController.index },
+  { method: "POST", path: "/info/{id}/updateinfo/{infoid}", config: infoController.update },
+  
   { method: "POST", path: "/placemark/{id}/uploadimage", config: placemarkController.uploadImage },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
-  
 ];

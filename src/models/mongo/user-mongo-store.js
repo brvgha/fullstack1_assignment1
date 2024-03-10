@@ -40,11 +40,23 @@ export const userMongoStore = {
 
   async updateUser(userid, updatedUser) {
     const user = await User.findOne({ _id: userid });
-    user.firstName = updatedUser.firstname;
-    user.lastName = updatedUser.lastname;
-    user.email = updatedUser.email;
-    user.password = updatedUser.password;
-    user.type = "user";
+    const defaultUser = await User.findOne({ _id: userid });
+    if (updatedUser.firstName) {
+      console.log(1)
+      user.firstName = updatedUser.firstName;
+    } else {
+      user.firstName = defaultUser.firstName;
+    }
+    if (updatedUser.lastName) {
+      user.lastName = updatedUser.lastName;
+    } else {
+      user.lastName = defaultUser.lastName;
+    }
+    if (updatedUser.password) {
+      user.password = updatedUser.password;
+    } else {
+      user.password = defaultUser.password;
+    }
     await user.save();
     return user;
   }

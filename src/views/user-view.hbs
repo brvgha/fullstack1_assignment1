@@ -1,0 +1,23 @@
+{{> menu active="account"}}
+
+<div class="is-centered">
+    <h1>Welcome {{user.firstName}} {{user.lastName}}!</h1>
+</div>
+
+<form class="box"  action="/user/updateuser/{{user._id}}" method="POST">
+  <label>Update User Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <input class="input" type="text" name="firstName", value="{{user.firstName}}">
+      </div>
+      <div class="field">
+        <input class="input" type="text" name="lastName" value="{{user.lastName}}">
+      </div>
+      <div class="field">
+        <input class="input" type="password"  name="password" value="{{user.password}}">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Update Details</button>
+</form>

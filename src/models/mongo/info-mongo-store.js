@@ -1,5 +1,4 @@
 import { Info } from "./info.js";
-import { PlaceMark } from "./placemark.js";
 
 export const infoMongoStore = {
   async getInfoByPlaceMarkId(id) {
@@ -40,6 +39,7 @@ export const infoMongoStore = {
   },
 
   async updateInfo(info, updatedInfo) {
+    info = await Info.findOne({ _id: info._id });
     info.description = updatedInfo.description;
     info.category = updatedInfo.category;
     info.analytics = updatedInfo.analytics;

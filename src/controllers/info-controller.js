@@ -5,7 +5,7 @@ export const infoController = {
   index: {
     handler: async function (request, h) {
       const placemark = await db.placeMarkStore.getPlaceMarkById(request.params.id);
-      const info = await db.infoStore.getInfoById(request.params.infoid);     
+      const info = await db.infoStore.getInfoById(request.params.infoid);   
       const viewData = {
         title: "Show Information",
         placemark: placemark,
@@ -20,7 +20,7 @@ export const infoController = {
       payload: infoSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-          return h.view("info-view", { title: "Edit info error", errors: error.details })
+          return h.view(".error", { title: "Edit info error", errors: error.details })
               .takeover()
               .code(400);
       },
@@ -28,11 +28,9 @@ export const infoController = {
     handler: async function (request, h) {
       const info = await db.infoStore.getInfoById(request.params.infoid);
       const newInfo = {
-        name: request.payload.name,
         category: request.payload.category,
         description: request.payload.description,
-        lat: request.payload.lat,
-        lng: request.payload.lng,
+        analytics: Number(request.payload.analytics),
       };
       await db.infoStore.updateInfo(info, newInfo);
       return h.redirect(`/placemark/${request.params.id}`);

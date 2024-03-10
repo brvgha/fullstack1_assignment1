@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
+import { UserSpec, UserCredentialsSpec, UserSpecExt, UserUpdateSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 
 const result = dotenv.config();
@@ -87,14 +87,35 @@ export const accountsController = {
 
   update: {
     validate: {
-      payload: UserSpec,
+      payload: UserUpdateSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("./error",
-          { title: "Edit user error", errors: error.details })
-          .takeover()
-          .code(400);
+          return h.view("./partials/error", { title: "Edit info error", errors: error.details })
+              .takeover()
+              .code(400);
       },
+    },
+    handler: async function (request, h) {
+      const user = await db.userStore.getUserById(request.params.id);
+      const newUserInfo = {
+        firstName: request.payload.firstName,
+        lastName: request.payload.lastName,
+        password: request.payload.password,
+      };
+      await db.userStore.updateUser(user, newUserInfo);
+      return h.redirect("/user");
+    },
+  },
+
+  account: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const user = await db.userStore.getUserById(loggedInUser._id);
+      const viewData = {
+        title: "Edit your PlaceMark Account Details",
+        user: user,
+      };
+      return h.view("user-view", viewData);
     },
   },
   
