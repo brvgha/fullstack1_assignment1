@@ -37,5 +37,10 @@ export const webRoutes = [
   { method: "POST", path: "/placemark/{id}/uploadimage", config: placemarkController.uploadImage },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
-  {method: 'GET', path: '/testlb', handler: function (request, h) {return('Server: ' + os.hostname());}, config: {auth: false}},
+  {method: 'GET', path: '/testlb', handler: function (request, h) {
+    const = os = require('os-utils');
+    const serverip = 'Server: ' + os.hostname();
+    const cpuUse = os.cpuUsage();
+    return(serverip + '\n' + 'CPU usage = ' + cpuUse);
+  }, config: {auth: false}},
 ];
