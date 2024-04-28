@@ -4,6 +4,7 @@ import { aboutController } from "./controllers/about-controller.js";
 import { placemarkController } from "./controllers/placemark-controller.js";
 import { adminController } from "./controllers/admin-controller.js";
 import { infoController } from "./controllers/info-controller.js";
+import os from "os";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -35,5 +36,6 @@ export const webRoutes = [
   
   { method: "POST", path: "/placemark/{id}/uploadimage", config: placemarkController.uploadImage },
 
-  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+  {method: 'GET', path: '/testlb', handler: function (request, h) {return('Server: ' + os.hostname());}, config: {auth: false}},
 ];
