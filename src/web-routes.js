@@ -5,6 +5,7 @@ import { placemarkController } from "./controllers/placemark-controller.js";
 import { adminController } from "./controllers/admin-controller.js";
 import { infoController } from "./controllers/info-controller.js";
 import os from "os";
+import process from "process";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -38,9 +39,8 @@ export const webRoutes = [
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
   {method: 'GET', path: '/testlb', handler: function (request, h) {
-    const = os = require('os-utils');
     const serverip = 'Server: ' + os.hostname();
-    const cpuUse = os.cpuUsage();
+    const cpuUse = process.cpuUsage();
     return(serverip + '\n' + 'CPU usage = ' + cpuUse);
   }, config: {auth: false}},
 ];
